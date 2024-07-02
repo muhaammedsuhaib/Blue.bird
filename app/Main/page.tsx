@@ -4,7 +4,7 @@ import Navbar from "../Navbar/page";
 import './main.css';
 
 const Main = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
