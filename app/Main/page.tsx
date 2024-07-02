@@ -116,48 +116,51 @@ const Main = () => {
           {/* Main content */}
           <div className="w-full md:w-1/2 p-2 ">
              <div className="w-full md:w-1/1 p-2 flex gap-1 overflow-auto custom-scrollbar"  > 
-             {[...Array(10)].map((_, i) => (
-                <React.Fragment key={i}>               
-                
-                <img
-                      src="https://via.placeholder.com/60"
-                      alt="profile"
-                      className="rounded-full border-2 border-blue-500"
-                    />
-                   
-                 
-                </React.Fragment>
-              ))}
-             <img
-                      src="https://via.placeholder.com/60"
-                      alt="profile"
-                      className="rounded-full border-2 border-blue-500"
-                    />
-             <img
-                      src="https://via.placeholder.com/60"
-                      alt="profile"
-                      className="rounded-full border-2 border-blue-500"
-                    />
+             <div className="relative inline-block">
+  <img
+    className="min-h-16 max-w-20 rounded-full"
+    src="https://scontent.fcok6-1.fna.fbcdn.net/v/t39.30808-1/448547224_493325343122558_2206856771406059895_n.jpg?stp=cp0_dst-jpg_p40x40&_nc_cat=105&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=knuzE3bMg20Q7kNvgGK8Xv0&_nc_ht=scontent.fcok6-1.fna&oh=00_AYAxqbS8aJfvXCJI4RmERBW6-MdDvs7al6o0sTxs4vDrRg&oe=668A1CDA"
+    alt="Profile Image"
+  />
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-10 h-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+</div>
+
+                    
+           {[...Array(17)].map((_, i) => (
+        <React.Fragment key={i}>
+          <img
+            className="h-16 w-16 rounded-full border-2 border-blue-500 object-cover"
+            src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
+            alt="avatar"
+          />
+        </React.Fragment>
+      ))}
              </div>
-            <div className="bg-gray-800 rounded-lg h-[85vh] overflow-auto custom-scrollbar">
-              {[...Array(5)].map((_, i) => (
-                <React.Fragment key={i}>
-                  <img
-                    src="https://scontent.fcok6-2.fna.fbcdn.net/v/t39.30808-6/435000590_452617757193317_6463377531588323765_n.jpg?stp=cp6_dst-jpg&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=IytGm5gvABQQ7kNvgH0tF8O&_nc_ht=scontent.fcok6-2.fna&oh=00_AYB0j-XLstEk-aaxsXuY0zmWl2Ag3MWpL3RcGJCf5c2LzQ&oe=6689E9E2"
-                    alt="avatar"
-                    className="w-full h-40 object-cover"
-                  />
-                  <div className="bg-black bg-opacity-60 p-2">
-                    <img
-                      src="https://via.placeholder.com/40"
-                      alt="profile"
-                      className="rounded-full border-2 border-blue-500"
-                    />
-                    <p className="text-white text-center mt-2">Ronaldo</p>
-                  </div>
-                </React.Fragment>
-              ))}
-            </div>
+             <div className="bg-gray-800 rounded-lg h-[85vh] overflow-auto custom-scrollbar">
+  {[...Array(5)].map((_, i) => (
+    <React.Fragment key={i}>
+     <div className="container bg-white p-1 text-start flex items-center">
+  <img
+    className="h-11 w-11 rounded-full border-2 border-blue-500 object-cover"
+    src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
+    alt="avatar"
+  />
+  <p className="ml-2 font-bold">suhaii.bb</p>
+</div>
+
+      <img
+        src="https://scontent.fcok6-2.fna.fbcdn.net/v/t39.30808-6/435000590_452617757193317_6463377531588323765_n.jpg?stp=cp6_dst-jpg&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=IytGm5gvABQQ7kNvgH0tF8O&_nc_ht=scontent.fcok6-2.fna&oh=00_AYB0j-XLstEk-aaxsXuY0zmWl2Ag3MWpL3RcGJCf5c2LzQ&oe=6689E9E2"
+        alt="avatar"
+        className="w-full h-auto object-cover"
+        style={{ maxHeight: 'auto' }} // Example: set a max height for the image
+      />
+      
+    </React.Fragment>
+  ))}
+</div>
+
           </div>
 
           {/* Extra content or sidebar */}
