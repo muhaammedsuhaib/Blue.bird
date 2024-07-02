@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/page";
 import './main.css';
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Main = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -15,8 +16,20 @@ const Main = () => {
       <Navbar />
       <section className="container mx-auto text-center bg-white">
         <div className="flex flex-wrap">
+        
 
           {/* Sidebar */}
+          <div className="w-full md:hidden text-start p-2">
+
+            <button
+              onClick={toggleSidebar}
+              className="bg-transparent text-black p-2 rounded-md"
+            >
+              {isSidebarOpen ?<XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+}
+            </button>
+          </div>
+          
           <div className={`w-full md:w-1/5 p-2 ${isSidebarOpen ? 'block' : 'hidden'} md:block`}>
             <div className="bg-transparent">
               <div className="p-0 bg-transparent">
@@ -47,20 +60,7 @@ const Main = () => {
           </div>
 
           {/* Toggle button for sidebar */}
-          <div className="w-full md:hidden p-2">
-            <button
-              onClick={toggleSidebar}
-              className="bg-transparent text-black p-2 rounded-md"
-            >
-              {isSidebarOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-</svg>
- : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0-3.75-3.75M17.25 21 21 17.25" />
-</svg>
-}
-            </button>
-          </div>
+         
 
           {/* Main content */}
           <div className="w-full md:w-1/2 p-2">
