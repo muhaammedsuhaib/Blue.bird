@@ -156,7 +156,10 @@ const Main = () => {
         className="w-full h-auto object-cover"
         style={{ maxHeight: 'auto' }} // Example: set a max height for the image
       />
-      
+
+       <div className="w-full bg-white md:w-1/1">
+      f
+            </div>
     </React.Fragment>
   ))}
 </div>
