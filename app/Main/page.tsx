@@ -4,24 +4,26 @@ import Navbar from "../Navbar/page";
 import './main.css';
 import { Bars3Icon, BellIcon, XMarkIcon ,PlayIcon} from "@heroicons/react/24/outline";
 
-const Main = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const Main: React.FC = () => {
+  
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  return (
+  return ( 
     <div>
       <Navbar />
-      <section className="container mx-auto text-center bg-white">
+      <button onClick={()=>setDarkMode(!darkMode)}>Change Darck mode</button>
+      <section className={`container mx-auto text-center ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
         <div className="flex flex-wrap">
           {/* Sidebar */}
           <div className="w-full md:hidden text-start p-2">
-
             <button
               onClick={toggleSidebar}
-              className="bg-transparent text-black p-2 rounded-md"
+              className="bg-transparent  p-2 rounded-md"
               >
               {isSidebarOpen ?<XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
 }
@@ -157,7 +159,7 @@ const Main = () => {
         style={{ maxHeight: 'auto' }} // Example: set a max height for the image
       />
 
-       <div className="w-full bg-white md:w-1/1">
+       <div className="w-full md:w-1/1">
       f
             </div>
     </React.Fragment>
