@@ -59,7 +59,7 @@ export default function Navbar() {
   }, [selectedOption]);
 
   return (
-    <Disclosure as="nav" className={`${darkMode?'bg-white':'bg-black'}`}>
+    <Disclosure as="nav" className={ `fixed top-0  w-full ${darkMode?'bg-white text-black':'bg-black text-white'}`}>
       {({ open }) => (
         <>
           <div className={`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ${darkMode?'bg-white text-black':'bg-black text-white'}`}>
