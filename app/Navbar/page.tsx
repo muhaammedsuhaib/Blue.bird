@@ -64,14 +64,14 @@ export default function Navbar() {
         <>
           <div className={`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ${darkMode?'bg-white text-black':'bg-black text-white'}`}>
             <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button */}
+              {/* <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                
                 <DisclosureButton onClick={toggleSidebar} className="relative inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-transparent">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {isSidebarOpen ?<XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />}
                 </DisclosureButton>
-              </div>
+              </div> */}
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
@@ -98,34 +98,22 @@ export default function Navbar() {
                   ))} */}
                   
                   {/* Search input with form submission */}
-                  <form onSubmit={handleSubmit} className="relative w-72">
+                  {/* <form onSubmit={handleSubmit} className="relative w-72">
                     <input
                       type="text"
-                      className="block w-full rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-1 mt-1"
-                      placeholder="Search..."
+                      className="block w-full rounded-md   placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 p-1 mt-3"
+                      placeholder="🔍 Search..."
                       value={searchTerm}
-                      // onChange={handleSearchChange} // Update state as user types
+                      onChange={handleSearchChange} // Update state as user types
                     />
-                    <div className="absolute inset-y-0 right-0 flex items-center">
-                      <select
-                        id="currency"
-                        name="currency"
-                        value={selectedOption}
-                        onChange={handleDropdownChange}
-                        className=" w-8 rounded-md border-0  bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-transparent sm:text-sm"
-                      >
-                        <option>HTML</option>
-                        <option>CSS</option>
-                        <option>JAVASCRIPT</option>
-                      </select>
-                    </div>
-                  </form>
+                    
+                  </form> */}
                 </div>
               </div>
               <div className={`${darkMode?'bg-white':'bg-black'} absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0`}>
                 <button
                   type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="relative rounded-full  p-1  hover:text-blue-600 "
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -140,8 +128,8 @@ export default function Navbar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
+                        alt="Profile"
                       />
                     </MenuButton>
                   </div>
