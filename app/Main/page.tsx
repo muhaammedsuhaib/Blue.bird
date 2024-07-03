@@ -5,8 +5,9 @@ import './main.css';
 import { Bars3Icon, BellIcon, XMarkIcon ,PlayIcon} from "@heroicons/react/24/outline";
 
 const Main: React.FC = () => {
-  
+
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
   const [darkMode, setDarkMode] = useState<boolean>(true);
 
   const toggleSidebar = () => {
@@ -20,7 +21,7 @@ const Main: React.FC = () => {
       <section className={`container mx-auto text-center ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
         <div className="flex flex-wrap">
           {/* Sidebar */}
-          <div className="w-full md:hidden text-start p-2">
+          <div className={`w-full md:hidden text-start p-2 ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
             <button
               onClick={toggleSidebar}
               className="bg-transparent  p-2 rounded-md"
@@ -29,7 +30,7 @@ const Main: React.FC = () => {
 }
             </button>
           </div>
-          <div className={`w-full md:w-1/5 p-2 ${isSidebarOpen ? 'block' : 'hidden'} md:block`}>
+          <div className={`w-full md:w-1/5 p-2 ${isSidebarOpen ? 'block' : 'hidden'} ${darkMode?"bg-white text-black":"bg-black text-white"} md:block`}>
             <div className="bg-transparent">
               <div className="p-0 bg-transparent">
                 <div className="rounded-md bg-transparent h-[85vh] overflow-auto custom-scrollbar">
@@ -61,8 +62,11 @@ const Main: React.FC = () => {
                       <div className="font-bold"> Home</div>
                     </div>
                    <div  className="flex items-center gap-2 p-3 border-b border-gray-200">
-                   <svg id="Explore--Streamline-Carbon" xmlns="http://www.w3.org/2000/svg" viewBox="-0.5 -0.5 16 16" height="16" width="16" className="size-9"><desc>Explore Streamline Icon: https://streamlinehq.com</desc><defs></defs><path d="M10.64390625 4.356140625a0.468375 0.468375 0 0 0 -0.47971875 -0.113296875l-4.21875 1.40625a0.46921874999999996 0.46921874999999996 0 0 0 -0.29639062499999996 0.29639062499999996l-1.40625 4.21875a0.46875 0.46875 0 0 0 0.5930156249999999 0.5930156249999999l4.21875 -1.40625a0.469359375 0.469359375 0 0 0 0.29639062499999996 -0.29643749999999996l1.40625 -4.21875a0.46875 0.46875 0 0 0 -0.113296875 -0.479671875ZM5.428640625 9.57140625l1.03565625 -3.1070625L8.535937500000001 8.535937500000001Z" stroke-width="1"></path><path d="M7.5 14.0625a6.5625 6.5625 0 1 1 6.5625 -6.5625 6.56990625 6.56990625 0 0 1 -6.5625 6.5625Zm0 -12.1875a5.625 5.625 0 1 0 5.625 5.625A5.631421875 5.631421875 0 0 0 7.5 1.875Z" stroke-width="1"></path><path id="_Transparent_Rectangle_" d="M0 0h15v15H0Z" fill="none" stroke-width="1"></path></svg>
-                      <div className="font-bold"> Explore</div>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
+  <path strokeLinecap="round" strokeLinejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" />
+</svg>
+
+                  <div className="font-bold"> Explore</div>
                     </div>
                    <div  className="flex items-center gap-2 p-3 border-b border-gray-200">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
@@ -72,8 +76,10 @@ const Main: React.FC = () => {
                     <div className="font-bold"> Search</div>
                     </div>
                    <div  className="flex items-center gap-2 p-3 border-b border-gray-200">
-                   <svg id="Run--Streamline-Carbon" xmlns="http://www.w3.org/2000/svg" viewBox="-0.5 -0.5 16 16" height="16" width="16" className="size-9"><desc>Run Streamline Icon: https://streamlinehq.com</desc><defs></defs><title>run</title><path d="M9.84375 7.5a2.8125 2.8125 0 1 1 -2.8125 2.8125 2.8125 2.8125 0 0 1 2.8125 -2.8125m0 -0.9375a3.75 3.75 0 1 0 3.75 3.75 3.75 3.75 0 0 0 -3.75 -3.75Z" stroke-width="1"></path><path d="M12.1875 1.875H2.8125a0.9375 0.9375 0 0 0 -0.9375 0.9375v9.375a0.9375 0.9375 0 0 0 0.9375 0.9375h1.875v-0.9375H2.8125V5.625h10.3125V2.8125a0.9375 0.9375 0 0 0 -0.9375 -0.9375ZM2.8125 4.6875V2.8125h9.375v1.875Z" stroke-width="1"></path><path d="m8.90625 8.90625 0 2.8125 2.34375 -1.40625 -2.34375 -1.40625z" stroke-width="1"></path><path id="_Transparent_Rectangle_" d="M0 0h15v15H0Z" fill="none" stroke-width="1"></path></svg>
-                      <div className="font-bold"> Video</div>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
+  <path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+</svg>
+<div className="font-bold"> Video</div>
                     </div>
                    <div  className="flex items-center gap-2 p-3 border-b border-gray-200">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
@@ -94,9 +100,6 @@ const Main: React.FC = () => {
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 </svg>
-
-
-
                       <div className="font-bold"> Create</div>
                     </div>
                    <div  className="flex items-center gap-2 p-3 border-b border-gray-200">
@@ -116,7 +119,7 @@ const Main: React.FC = () => {
          
 
           {/* Main content */}
-          <div className="w-full md:w-1/2 p-2 ">
+          <div className={`w-full md:w-1/2 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
              <div className="w-full md:w-1/1 p-2 flex gap-1 overflow-auto custom-scrollbar"  > 
              <div className="relative inline-block">
   <img
@@ -128,7 +131,6 @@ const Main: React.FC = () => {
   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 </svg>
 </div>
-
                     
            {[...Array(17)].map((_, i) => (
         <React.Fragment key={i}>
@@ -140,10 +142,10 @@ const Main: React.FC = () => {
         </React.Fragment>
       ))}
              </div>
-             <div className="bg-gray-800 rounded-lg h-[85vh] overflow-auto custom-scrollbar">
+             <div className=" rounded-lg h-[85vh] overflow-auto custom-scrollbar">
   {[...Array(5)].map((_, i) => (
     <React.Fragment key={i}>
-     <div className="container bg-white p-1 text-start flex items-center">
+     <div className="container  p-1 text-start flex items-center">
   <img
     className="h-11 w-11 rounded-full border-2 border-blue-500 object-cover"
     src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
@@ -169,8 +171,8 @@ const Main: React.FC = () => {
           </div>
 
           {/* Extra content or sidebar */}
-          <div className="w-full md:w-1/4 p-2">
-            <div className="bg-gray-800 rounded-lg p-4">
+          <div className={`w-full md:w-1/4 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
+            <div className="rounded-lg p-4">
               <div className="flex items-center gap-4 border-b border-gray-200 pb-2">
                 <img
                   src="https://via.placeholder.com/40"
@@ -179,7 +181,7 @@ const Main: React.FC = () => {
                 />
                 <input
                   type="text"
-                  className="w-full border-none bg-gray-700 text-white focus:outline-none"
+                  className="w-full border-none  text-white focus:outline-none"
                   placeholder="Type something..."
                 />
               </div>
