@@ -16,7 +16,7 @@ const Main: React.FC = () => {
     <div>
       <Navbar />
       <br /><br />
-      <section className={`container mx-auto text-center ${darkMode?"bg-white text-black":"bg-black text-white"} `}>
+      <section className={`container mx-auto text-center ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
       {/* <button onClick={()=>setDarkMode(!darkMode)}>Change Darck mode</button> */}
         <div className="flex flex-wrap">
           {/* Sidebar */}
@@ -46,7 +46,7 @@ const Main: React.FC = () => {
 }
             </button>
           </div> </>} */}
-          <div className={`w-full md:w-1/5 p-2 ${isSidebarOpen ? 'block' : 'hidden'} ${darkMode?"bg-white text-black":"bg-black text-white"} md:block`}>
+          <div className={`w-full md:w-1/5 p-2 ${isSidebarOpen ? 'block' : 'hidden'} ${darkMode?"bg-white text-black":"bg-black text-white"} md:block mt-5`}>
             <div className="bg-transparent">
               <div className="p-0 bg-transparent">
                 <div className="rounded-md bg-transparent h-[85vh] overflow-auto custom-scrollbar">
@@ -110,7 +110,7 @@ const Main: React.FC = () => {
 </svg>
 
 
-                      <div className="font-bold"> Notification</div>
+                      <div className="font-bold" onClick={()=>setDarkMode(!darkMode)}> Notification</div>
                     </div>
                    <div  className="flex items-center gap-2 p-3 ">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -135,9 +135,9 @@ const Main: React.FC = () => {
          
 
           {/* Main content */}
-          <div className={`w-full md:w-1/2 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"} h-[100vh] overflow-auto custom-scrollbar`}>
+          <div className={`w-full md:w-1/2 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"} h-[90vh] overflow-auto custom-scrollbar mt-5`}>
              <div className="w-full md:w-1/1 p-2 flex gap-1 overflow-auto custom-scrollbar"  > 
-             <div className="relative inline-block">
+             <div className="container"><div className="relative inline-block">
   <img
     className="min-h-16 max-w-20 rounded-full"
     src="https://scontent.fcok6-1.fna.fbcdn.net/v/t39.30808-1/448547224_493325343122558_2206856771406059895_n.jpg?stp=cp0_dst-jpg_p40x40&_nc_cat=105&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=knuzE3bMg20Q7kNvgGK8Xv0&_nc_ht=scontent.fcok6-1.fna&oh=00_AYAxqbS8aJfvXCJI4RmERBW6-MdDvs7al6o0sTxs4vDrRg&oe=668A1CDA"
@@ -146,7 +146,8 @@ const Main: React.FC = () => {
  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-10 h-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 </svg>
-</div>
+</div></div>
+             
                     
            {[...Array(17)].map((_, i) => (
         <React.Fragment key={i}>
@@ -187,7 +188,7 @@ const Main: React.FC = () => {
           </div>
 
           {/* Extra content or sidebar */}
-          <div className={`w-full md:w-1/4 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
+          <div className={`w-full md:w-1/4 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"} mt-5`}>
             <div className="rounded-lg p-4">
               <div className="flex items-center gap-4 border-b border-gray-200 pb-2">
                 <img
