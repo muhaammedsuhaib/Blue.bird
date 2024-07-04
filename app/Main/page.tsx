@@ -211,6 +211,10 @@ const Main: React.FC = () => {
             <details className="text-start text-gray-500 text-sm ">
   <summary className="outline-none ">View all 10 comments</summary>
   <p className="p-4">നിര്‍ത്തിയിട്ട മൂന്നു കാറുകള്‍ക്ക് മേല്‍ മരം വീണു; കാറിനുള്ളില്‍ ആളില്ലാതിരുന്നതിനാൽ ഒഴിവായത് വൻഅപകടം #car #tree #cartree #kerala #rain #rainupdate</p>           
+  <p className="p-4">നിര്‍ത്തിയിട്ട മൂന്നു കാറുകള്‍ക്ക് മേല്‍ മരം വീണു; കാറിനുള്ളില്‍ ആളില്ലാതിരുന്നതിനാൽ ഒഴിവായത് വൻഅപകടം #car #tree #cartree #kerala #rain #rainupdate</p>           
+  <p className="p-4">നിര്‍ത്തിയിട്ട മൂന്നു കാറുകള്‍ക്ക് മേല്‍ മരം വീണു; കാറിനുള്ളില്‍ ആളില്ലാതിരുന്നതിനാൽ ഒഴിവായത് വൻഅപകടം #car #tree #cartree #kerala #rain #rainupdate</p>           
+  <p className="p-4">നിര്‍ത്തിയിട്ട മൂന്നു കാറുകള്‍ക്ക് മേല്‍ മരം വീണു; കാറിനുള്ളില്‍ ആളില്ലാതിരുന്നതിനാൽ ഒഴിവായത് വൻഅപകടം #car #tree #cartree #kerala #rain #rainupdate</p>           
+  <p className="p-4">നിര്‍ത്തിയിട്ട മൂന്നു കാറുകള്‍ക്ക് മേല്‍ മരം വീണു; കാറിനുള്ളില്‍ ആളില്ലാതിരുന്നതിനാൽ ഒഴിവായത് വൻഅപകടം #car #tree #cartree #kerala #rain #rainupdate</p>           
 </details>           
             <hr />
     </React.Fragment>
