@@ -9,7 +9,7 @@ const Main: React.FC = () => {
   const {isSidebarOpen, setIsSidebarOpen, darkMode, setDarkMode } = useAppContext();
 
 
-  const [comment, setComment] = useState<String>("");
+  const [comment, setComment] = useState<any>("");
 
   // Function to handle input change and update the state
   const handleCommentInput = (e: ChangeEvent<HTMLInputElement>) => {
