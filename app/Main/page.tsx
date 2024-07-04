@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState ,ChangeEvent, FormEvent } from "react";
 import Navbar from "../Navbar/page";
 import './main.css';
 import { Bars3Icon, BellIcon, XMarkIcon ,PlayIcon} from "@heroicons/react/24/outline";
@@ -7,6 +7,24 @@ import { useAppContext } from "../Context/AppContext";
 
 const Main: React.FC = () => {
   const {isSidebarOpen, setIsSidebarOpen, darkMode, setDarkMode } = useAppContext();
+
+
+  const [comment, setComment] = useState<String>("");
+
+  // Function to handle input change and update the state
+  const handleCommentInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
+  };
+
+  // Function to handle form submission and collect data
+  const handleCommentSubmit = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Comment submitted:", comment);
+    // Add your data collection logic here (e.g., send to API)
+  };
+
+
+
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -208,6 +226,22 @@ const Main: React.FC = () => {
             </div>
             </div>
             <p className="text-start">2,847 likes</p>
+            <div className={` ${darkMode?"bg-white text-black":"bg-black text-white"} `}>             
+        {/* Button to submit the comment */}
+            <form className="flex" onSubmit={handleCommentSubmit}>
+        {/* Input field to add a comment */}
+        <input
+          type="text"
+          className="w-full bg-transparent border-none focus:outline-none"
+          placeholder="Add a comment…"
+          value={comment}
+          onChange={handleCommentInput}
+        />
+        {comment.length === 0 ? null:(
+        <button type="submit" className="text-blue-800">Post</button>
+      ) }
+      </form>
+          </div>
             <details className="text-start text-gray-500 text-sm ">
   <summary className="outline-none ">View all 10 comments</summary>
   <p className="p-4">നിര്‍ത്തിയിട്ട മൂന്നു കാറുകള്‍ക്ക് മേല്‍ മരം വീണു; കാറിനുള്ളില്‍ ആളില്ലാതിരുന്നതിനാൽ ഒഴിവായത് വൻഅപകടം #car #tree #cartree #kerala #rain #rainupdate</p>           
