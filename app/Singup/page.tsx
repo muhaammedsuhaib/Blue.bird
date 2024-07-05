@@ -6,7 +6,7 @@ const page = () => {
   <div className="w-full md:w-1/2">
   <div className="w-full h-screen flex items-center justify-center text-center">
   {/* <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8"> */}
-    <img src="/bglogo.png" alt="BrandLogo.png"  className='w-[350px] h-auto'/>
+    <img src="/bglogo.png" alt="BrandLogo"  className='w-[350px] h-auto'/>
       {/* </div> */}
   </div>
   </div>
