@@ -5,18 +5,18 @@ const page = () => {
    <div className="w-full h-[100vh] flex flex-wrap">
   <div className="w-full md:w-1/2">
   <div className="w-full h-screen flex items-center justify-center text-center">
-  {/* <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8"> */}
+  <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <img src="/bglogo.png" alt="BrandLogo"  className='w-[350px] h-auto'/>
-      {/* </div> */}
+      </div>
   </div>
   </div>
-  <div className="w-full  bg-white-600 md:w-1/2">
+  <div className="w-full  bg-slate-100 md:w-1/2  rounded-tl-[100px] rounded-tr-[500px] rounded-bl-[80px] rounded-br-[30px]">
   
   <div className="w-full h-screen flex items-center justify-center text-start">
   
     
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
           <img
             alt="Bluebird"
             src="/BrandLogo.png"
