@@ -31,12 +31,12 @@ const Singup: React.FC = () => {
   <img
     src={`${darkMode ? '/bglogo.png' : '/bluebird-white.png'}`}
     alt="BrandLogo"
-    className="mx-auto h-30 w-auto"
+    className="mx-auto h-36 w-auto"
   />
 </div>
          
 
-                <h2 className="mt-0 text-center text-2xl font-bold leading-9 tracking-tight">
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
                   Log into existing account
                 </h2>
               </div>
@@ -107,12 +107,12 @@ const Singup: React.FC = () => {
   <img
     src={`${darkMode ? '/bglogo.png' : '/bluebird-white.png'}`}
     alt="BrandLogo"
-    className="mx-auto h-30 w-auto"
+    className="mx-auto h-36 w-auto"
   />
 </div>
          
 
-                <h2 className="mt-0 text-center text-2xl font-bold leading-9 tracking-tight">
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
                 Create new account
                 </h2>
               </div>
