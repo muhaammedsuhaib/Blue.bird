@@ -31,11 +31,9 @@ export default function Navbar() {
 
 
 
-  const {isSidebarOpen, setIsSidebarOpen, darkMode, setDarkMode } = useAppContext();
+  const { darkMode, setDarkMode } = useAppContext();
   
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value); // Update search term state as user types
