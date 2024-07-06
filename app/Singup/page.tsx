@@ -27,7 +27,7 @@ const Singup: React.FC = () => {
 {chageC? <>
               <div className={`sm:mx-auto sm:w-full sm:max-w-sm ${darkMode?'bg-white text-black':'bg-black text-white'}`}>
 
-              <div className="text-center md:hidde">
+              <div className="text-center md:hidden">
   <img
     src={`${darkMode ? '/bglogo.png' : '/bluebird-white.png'}`}
     alt="BrandLogo"
