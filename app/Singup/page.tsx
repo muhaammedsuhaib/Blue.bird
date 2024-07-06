@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Navbar/page";
 import { useAppContext } from "../Context/AppContext";
 
 const Singup: React.FC = () => {
   const { darkMode, setDarkMode } = useAppContext();
+  const [responsive,setResponsive]=useState<boolean>(false)
 
   return (
     <>
@@ -19,6 +20,17 @@ const Singup: React.FC = () => {
           <div className="w-full h-screen flex items-center justify-center text-start">
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
               <div className={`sm:mx-auto sm:w-full sm:max-w-sm ${darkMode?'bg-white text-black':'bg-black text-white'}`}>
+
+              <div className="text-center md:hidden">
+  <img
+    src={`${darkMode ? '/bglogo.png' : '/bluebird-white.png'}`}
+    alt="BrandLogo"
+    className="mx-auto h-36 w-auto"
+  />
+</div>
+         
+
+
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
                   Sign in to your account
                 </h2>

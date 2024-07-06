@@ -12,6 +12,7 @@ const AppContext = createContext<AppContextInterface | null>(null);
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   
   const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [isSidebarOpen,setIsSidebarOpen]=useState<boolean>(false)
 
   return (
     <AppContext.Provider value={{darkMode, setDarkMode }}>
