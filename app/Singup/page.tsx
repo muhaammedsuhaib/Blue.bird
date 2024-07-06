@@ -167,7 +167,7 @@ const Singup: React.FC = () => {
                 <p className="mt-10 text-center text-sm">
                 Have an account?{' '}
                   <a href="#"  onClick={()=>setChangeC(!chageC)}  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                   login your'e account
+                   {`login your'e account`}
                   </a>
                 </p>
               </div>
