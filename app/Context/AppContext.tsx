@@ -3,8 +3,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AppContextInterface {
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: (value: boolean) => void;
   darkMode: boolean;
   setDarkMode: (value: boolean) => void;
 }
@@ -12,11 +10,11 @@ interface AppContextInterface {
 const AppContext = createContext<AppContextInterface | null>(null);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  
   const [darkMode, setDarkMode] = useState<boolean>(true);
 
   return (
-    <AppContext.Provider value={{ isSidebarOpen, setIsSidebarOpen, darkMode, setDarkMode }}>
+    <AppContext.Provider value={{darkMode, setDarkMode }}>
       {children}
     </AppContext.Provider>
   );

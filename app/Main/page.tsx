@@ -6,9 +6,9 @@ import { Bars3Icon, BellIcon, XMarkIcon ,PlayIcon} from "@heroicons/react/24/out
 import { useAppContext } from "../Context/AppContext";
 
 const Main: React.FC = () => {
-  const {isSidebarOpen, setIsSidebarOpen, darkMode, setDarkMode } = useAppContext();
+  const {darkMode, setDarkMode } = useAppContext();
 
-
+  const [isSidebarOpen,setIsSidebarOpen]=useState<boolean>(false)
   const [comment, setComment] = useState<string>("");
  
   // Function to handle input change and update the state
