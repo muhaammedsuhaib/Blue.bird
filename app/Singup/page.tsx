@@ -10,11 +10,11 @@ const Singup: React.FC = () => {
   return (
     <>
       <div className={`w-full h-[100vh] flex flex-wrap ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>
-        <div className={`hidden md:flex w-full md:w-1/2 ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>
-          <div className="text-center">
-            <img src={`${darkMode ? '/bglogo.png' :'/bluebird-white.png' } `} alt="BrandLogo" className='w-auto h-auto' />
-          </div>
-        </div>
+      <div className={`hidden md:flex justify-center w-full md:w-1/2 ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>
+  <div className="flex items-center justify-center">
+    <img src={`${darkMode ? '/bglogo.png' : '/bluebird-white.png'}`} alt="BrandLogo" className="h-auto w-32 md:w-auto" />
+  </div>
+</div>
 
         <div className={`w-full md:w-1/2 ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>
           <div className="w-full h-screen flex items-center justify-center text-start">
