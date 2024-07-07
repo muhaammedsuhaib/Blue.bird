@@ -1,7 +1,7 @@
 "use client"
 import React, { useState ,ChangeEvent, FormEvent } from "react";
 import Navbar from "../Navbar/page";
-import './main.css';
+import './message.css';
 import { Bars3Icon, BellIcon, XMarkIcon ,PlayIcon} from "@heroicons/react/24/outline";
 import { useAppContext } from "../Context/AppContext";
 
