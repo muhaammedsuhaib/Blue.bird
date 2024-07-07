@@ -34,7 +34,7 @@ const Main: React.FC = () => {
     <div>
       <Navbar />
       <br /><br />
-      <section className={`container mx-auto text-center ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
+      <section className={`container mx-auto text-center ${darkMode?"bg-white text-black":"bg-black text-white"} `}>
       {/* <button onClick={()=>setDarkMode(!darkMode)}>Change Darck mode</button> */}
         <div className="flex flex-wrap">
           {/* Sidebar */}
@@ -67,7 +67,7 @@ const Main: React.FC = () => {
           <div className={`w-full md:w-1/5 p-2 ${isSidebarOpen ? 'block' : 'hidden'} ${darkMode?"bg-white text-black":"bg-black text-white"} md:block mt-5`}>
             <div className="bg-transparent">
               <div className="p-0 bg-transparent">
-                <div className="rounded-md bg-transparent h-[89vh] overflow-auto custom-scrollbar">
+                <div className="rounded-md bg-transparent h-[85vh] overflow-auto custom-scrollbar">
                   {/* Sidebar content */}
                   {/* {[...Array(10)].map((_, i) => (
                     <div key={i} className="flex items-center gap-2 p-3 border-b border-gray-200">
@@ -258,36 +258,39 @@ const Main: React.FC = () => {
           </div>
 
           {/* Extra content or sidebar */}
-          <div className={`w-full md:w-1/4 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"} mt-5`}>
-            <div className="p-4">
-              <div className="flex items-center gap-5">
-              <img
-            className="h-10 w-10 rounded-full border-2 border-blue-500 object-cover"
-            src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
-            alt="avatar"
-          />
-          <div className="w-full ">
-            <div className="text-start "><h1 className="font-bold pt-5">suhai.bb</h1></div>
-          <div className="text-end text-blue-700"><a href="#" className="text-sm">Switch</a></div>          
-          </div>
-           
-              </div>
-            </div>
-
-            <h1 className="text-start text-sm mx-2">Suggested for you</h1>
-            {[...Array(5)].map((_, i) => (
-    <React.Fragment key={i}>
-     <div className="container  p-1 text-start flex items-center">
+          <div className={`w-full md:w-1/4 p-2 ${darkMode?"bg-white text-black":"bg-black text-white"}`}>
+          <div className="w-full p-5 text-start flex items-center">
   <img
     className="h-11 w-11 rounded-full border-2 border-blue-500 object-cover"
     src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
     alt="avatar"
   />
   <p className="ml-2 font-bold">suhaii.bb</p>
+  <div className="w-full text-end">
+
+  <a href="#" className="text-sm text-blue-700"> Switch</a>
+  </div>
+</div>
+
+            <h1 className="text-start text-sm mx-2  mb-5">Suggested for you</h1>
+            <div className="w-full h-[70vh] overflow-auto custom-scrollbar">
+            {[...Array(70)].map((_, i) => (
+    <React.Fragment key={i}>
+     <div className="w-full p-1 text-start flex items-center">
+  <img
+    className="h-11 w-11 rounded-full border-2 border-blue-500 object-cover"
+    src="https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg"
+    alt="avatar"
+  />
+  <p className="ml-2 font-bold">suhaii.bb</p>
+  <div className="w-full text-end">
+
   <a href="#" className="text-sm text-blue-700"> Follow</a>
+  </div>
 </div>
     </React.Fragment>
   ))}
+  </div>
           </div>
          
 
