@@ -190,7 +190,7 @@ const Main: React.FC = () => {
 </div>
 
       <img
-        src="https://scontent.fcok6-2.fna.fbcdn.net/v/t39.30808-6/435000590_452617757193317_6463377531588323765_n.jpg?stp=cp6_dst-jpg&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=IytGm5gvABQQ7kNvgH0tF8O&_nc_ht=scontent.fcok6-2.fna&oh=00_AYB0j-XLstEk-aaxsXuY0zmWl2Ag3MWpL3RcGJCf5c2LzQ&oe=6689E9E2"
+        src="https://scontent.fcok6-2.fna.fbcdn.net/v/t39.30808-6/435000590_452617757193317_6463377531588323765_n.jpg?stp=cp6_dst-jpg_p526x296&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hJSsSfW3uQUQ7kNvgG_shjz&_nc_ht=scontent.fcok6-2.fna&oh=00_AYDAKs8B2v4qJNS379Kz1k0i8bEv5NsJ3dm8GuqlmdUe7g&oe=66908162"
         alt="avatar"
         className="w-full h-auto object-cover"
         style={{ maxHeight: 'auto' }} // Example: set a max height for the image
