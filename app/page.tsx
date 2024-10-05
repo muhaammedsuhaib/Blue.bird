@@ -106,7 +106,7 @@ export default function Home() {
       </div>
 
       {/* Brand Logo Section */}
-      <div className="mt-12">
+      <div className="flex items-center justify-center mt-12">
         <Image
           src="/bglogo.png"
           alt="Blue Bird Logo"
