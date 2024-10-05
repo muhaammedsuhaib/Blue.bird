@@ -61,9 +61,6 @@ const Signup: React.FC = () => {
                 alt="Blue Bird Logo"
                 width={70}
                 height={70}
-                className="mx-auto"
-                priority
-                loading="eager"
               />
             </Link>
 

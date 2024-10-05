@@ -27,9 +27,6 @@ export default function Home() {
               alt="Blue Bird Logo"
               width={70}
               height={70}
-              className="mx-auto"
-              priority
-              loading="eager"
             />
           </Link>
           <Link
@@ -115,9 +112,6 @@ export default function Home() {
           alt="Blue Bird Logo"
           width={150}
           height={150}
-          className="mx-auto"
-          priority
-          loading="eager"
         />
       </div>
 

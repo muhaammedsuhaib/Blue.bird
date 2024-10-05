@@ -11,19 +11,21 @@ const AppContext = createContext<AppContextInterface | null>(null);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
+  const [darkMode, setDarkMode] = useState<boolean>(false); // Default to false (light mode)
+
+  useEffect(() => {
     // Get initial value from local storage
     const savedMode = localStorage.getItem("darkMode");
-    return savedMode ? JSON.parse(savedMode) : false; // Default to false (light mode)
-  });
+    setDarkMode(savedMode ? JSON.parse(savedMode) : false); // Check localStorage only on client side
 
-  // Update local storage whenever darkMode changes
-  useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    // Update local storage whenever darkMode changes
+    return () => {
+      localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    };
   }, [darkMode]);
 
   return (
-    <AppContext.Provider value={{darkMode, setDarkMode }}>
+    <AppContext.Provider value={{ darkMode, setDarkMode }}>
       {children}
     </AppContext.Provider>
   );
