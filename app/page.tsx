@@ -1,125 +1,184 @@
+"use client";
 import Image from "next/image";
-import Navbar from "./Navbar/page";
 import Link from "next/link";
+import {
+  FaUserFriends,
+  FaComments,
+  FaRegHeart,
+  FaCamera,
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaWhatsapp,
+  FaLinkedin,
+  FaInstagram,
+  FaTwitter,
+} from "react-icons/fa"; 
 
 export default function Home() {
-
   return (
-    <main className="flex min-h-screen flex-col items-center bg-white text-black">
-      
-<Link href='/Singup'>Login</Link>
-<Link href='/Explore'>Explore</Link>
-<Link href='/Search'>Search</Link>
-<Link href='/video'>Video</Link>
-<Link href='/Message'>Message</Link>
-<Link href='/Notification'>Notfication</Link>
-<Link href='/Profile'>Profile</Link>
-
-      {/* <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
+    <main className="flex min-h-screen flex-col bg-gray-50 text-gray-800">
+      {/* Navigation Bar */}
+      <header className="text-white py-4">
+        <nav className="container mx-auto flex justify-between items-center px-6">
+          <Link href="/">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
+              src="/bglogo.png"
+              alt="Blue Bird Logo"
+              width={70}
+              height={70}
+              className="mx-auto"
               priority
+              loading="eager"
             />
-          </a>
+          </Link>
+          <Link
+            href="/Signup"
+            className="flex text-black items-center mx-4 text-lg hover:text-indigo-300"
+            aria-label="Go to account page"
+          >
+            <FaUser className="mr-2" aria-hidden="true" size={20} />{" "}
+            {/* User Icon */}
+            <span className="hidden sm:block"> Go to account</span>
+          </Link>
+        </nav>
+      </header>
+
+      {/* Welcome Section */}
+      <div className="flex flex-col justify-center items-center text-center my-12 px-4">
+        <h2 className="text-5xl font-bold mb-4">Welcome to Blue Bird!</h2>
+        <p className="mb-6 text-lg max-w-md">
+          Connect, share, and discover with friends in an engaging social
+          network!
+        </p>
+        <Link
+          href="/Signup"
+          className="rounded-md px-6 py-3 text-lg font-semibold shadow-md transition-colors bg-indigo-600 text-white hover:bg-indigo-500"
+          aria-label="Get started by signing up"
+        >
+          Get Started
+        </Link>
+      </div>
+
+      {/* Feature Icons Section */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full max-w-5xl px-4 mx-auto">
+        {/* User Connections */}
+        <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <FaUserFriends
+            className="text-5xl text-indigo-600 mb-4"
+            aria-hidden="true"
+          />
+          <h3 className="text-xl font-semibold">Connect with Friends</h3>
+          <p className="text-center mt-2">
+            Find and connect with friends around the world.
+          </p>
+        </div>
+        {/* Messaging Feature */}
+        <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <FaComments
+            className="text-5xl text-indigo-600 mb-4"
+            aria-hidden="true"
+          />
+          <h3 className="text-xl font-semibold">Instant Messaging</h3>
+          <p className="text-center mt-2">
+            Chat with friends in real-time, anytime.
+          </p>
+        </div>
+        {/* Content Sharing */}
+        <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <FaCamera
+            className="text-5xl text-indigo-600 mb-4"
+            aria-hidden="true"
+          />
+          <h3 className="text-xl font-semibold">Share Your Moments</h3>
+          <p className="text-center mt-2">
+            Post photos and updates to share with your network.
+          </p>
+        </div>
+        {/* Likes and Interactions */}
+        <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <FaRegHeart
+            className="text-5xl text-indigo-600 mb-4"
+            aria-hidden="true"
+          />
+          <h3 className="text-xl font-semibold">Engage with Posts</h3>
+          <p className="text-center mt-2">
+            Like and comment on posts from friends and creators.
+          </p>
         </div>
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
+      {/* Brand Logo Section */}
+      <div className="mt-12">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
+          src="/bglogo.png"
+          alt="Blue Bird Logo"
+          width={150}
+          height={150}
+          className="mx-auto"
           priority
+          loading="eager"
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      {/* Footer Section */}
+      <footer className="bg-gray-900 text-white py-8 mt-12">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+          {/* Contact Info */}
+          <div className="mb-4 md:mb-0">
+            <h4 className="text-lg font-semibold mb-2">Contact Us</h4>
+            <p className="flex items-center">
+              <FaEnvelope className="mr-2" aria-hidden="true" />
+              <span>muhammedsuhaibpottayil@gmail.com</span>
+            </p>
+            <p className="flex items-center">
+              <FaPhone className="mr-2" aria-hidden="true" />
+              <span>+91 736 890297</span>
+            </p>
+            <p className="flex items-center">
+              <FaWhatsapp className="mr-2" aria-hidden="true" />
+              <span>+91 736 890297</span>
+            </p>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+            <p className="text-gray-400">
+              Check out our company portfolio:{" "}
+              <a
+                href="https://dev-hubb.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-400 hover:text-indigo-300"
+              >
+               Devhubb Technology
+              </a>
+            </p>
+          </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div> */}
+          {/* Social Media Links */}
+          <div className="flex space-x-6">
+            <Link
+              href="https://www.linkedin.com/in/muhammedsuhaib/"
+              aria-label="LinkedIn"
+              className="hover:text-gray-400"
+            >
+              <FaLinkedin className="text-2xl" aria-hidden="true" />
+            </Link>
+            <Link
+              href="https://www.instagram.com/devhu.bb"
+              aria-label="Instagram"
+              className="hover:text-gray-400"
+            >
+              <FaInstagram className="text-2xl" aria-hidden="true" />
+            </Link>
+            <Link
+              href="https://x.com/MuhaammedSuhaib"
+              aria-label="Twitter"
+              className="hover:text-gray-400"
+            >
+              <FaTwitter className="text-2xl" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
