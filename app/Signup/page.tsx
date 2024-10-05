@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useAppContext } from "../Context/AppContext";
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,8 +9,25 @@ import { IoIosPartlySunny } from "react-icons/io";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 
 const Signup: React.FC = () => {
-  const { darkMode, setDarkMode } = useAppContext();
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(false); 
+
+
+
+
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem("darkMode");
+    if (savedDarkMode === "true") {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, []);
+
+  // Store dark mode preference in local storage when it changes
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
 
   const validationSchema = Yup.object({
     email: Yup.string()
