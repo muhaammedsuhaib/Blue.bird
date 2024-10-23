@@ -88,7 +88,7 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
 
       {/* Suggestions */}
       <div
-        className="flex flex-col space-y-4 w-full rounded-lg shadow-md overflow-y-auto"
+        className="flex flex-col space-y-1 w-full rounded-lg shadow-md overflow-y-auto"
         style={{
           maxHeight: '50vh', // Adjust this value based on your layout preferences
           backgroundColor: theme.background,
@@ -97,7 +97,7 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
         {dummySuggestions.map((suggestion) => (
           <div
             key={suggestion.id}
-            className="flex items-center justify-between p-3 rounded-lg transition-all duration-300 ease-in-out hover:bg-gray-200"
+            className="flex items-center justify-between p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-gray-200"
             style={{ backgroundColor: theme.background }}
           >
             <div className="flex items-center space-x-4 w-full">
@@ -121,8 +121,8 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
       
       {/* Footer Links */}
       <div className="text-sm text-gray-500 mt-4">
-        <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Language | Devhubb Verified</p>
-        <p className="mt-2">© 2024 Bluebird from DevHubb</p>
+        <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Language | <Link href="https://devhubb.vercel.app/" className='hover:underline' passHref>DevHubb</Link> Verified</p>
+        <p className="mt-2">© 2024 Bluebird from <Link href="https://devhubb.vercel.app/" className='hover:underline' passHref>DevHubb</Link></p>
       </div>
     </div>
   );
