@@ -30,7 +30,7 @@ export default function Home() {
             />
           </Link>
           <Link
-            href="/Signup"
+            href="/auth"
             className="flex text-black items-center mx-4 text-lg hover:text-indigo-300"
             aria-label="Go to account page"
           >
@@ -49,7 +49,7 @@ export default function Home() {
           network!
         </p>
         <Link
-          href="/Signup"
+          href="/auth"
           className="rounded-md px-6 py-3 text-lg font-semibold shadow-md transition-colors bg-indigo-600 text-white hover:bg-indigo-500"
           aria-label="Get started by signing up"
         >

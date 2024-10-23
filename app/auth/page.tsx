@@ -8,7 +8,7 @@ import Link from "next/link";
 import { IoIosPartlySunny } from "react-icons/io";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 
-const Signup: React.FC = () => {
+const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [darkMode, setDarkMode] = useState<boolean>(false); 
 
@@ -207,7 +207,7 @@ const Signup: React.FC = () => {
                     <button
                       type="button"
                       onClick={handleGoogleSignup}
-                      className="flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-700 shadow-sm hover:bg-gray-100"
+                      className="flex w-full bg-white items-center justify-center gap-2 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-700 shadow-sm hover:bg-gray-100"
                     >
                       <FcGoogle className="text-2xl" />
                       Sign up with Google
@@ -234,4 +234,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default Auth;
