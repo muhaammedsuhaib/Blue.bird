@@ -5,6 +5,7 @@ import Sidebar from "../components/user-components/Sidebar";
 import Story from "../components/user-components/Story";
 import Post from "../components/user-components/Post";
 import { Theme } from "../utils/Theme";
+import Suggestions from "../components/user-components/Suggestions";
 
 const Userlayout: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -52,9 +53,8 @@ const Userlayout: React.FC = () => {
       </section>
 
       {/* Suggestions Section */}
-      <aside className="w-full md:w-1/4 p-4 md:h-screen overflow-auto" style={{ backgroundColor: theme.background }}>
-        <h3 className="text-lg font-semibold">Suggestions</h3>
-        <p>Suggestions content will go here.</p>
+      <aside className="w-full md:w-1/4 p-4 md:h-screen overflow-auto hidden md:block" style={{ backgroundColor: theme.background }}>
+        <Suggestions userId={'mongo id'} theme={theme}/>
       </aside>
     </main>
   );

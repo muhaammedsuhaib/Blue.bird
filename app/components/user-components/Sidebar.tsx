@@ -35,7 +35,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ darkMode, theme, toggleDarkMode, isOpen, toggleSidebar }) => {
   return (
     <div
-      className={`fixed inset-0 z-30 transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-1/4 p-4`}
+      className={`fixed inset-0 z-30  transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-1/6 p-4 border-r-2`}
       style={{ backgroundColor: theme.background, color: theme.text }}
     >
       {/* Sidebar Close Button */}
