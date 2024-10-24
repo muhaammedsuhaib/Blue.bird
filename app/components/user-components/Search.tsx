@@ -1,18 +1,17 @@
-// components/Search.tsx
-
+"use client";
 import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa'; // Import the close icon
 
 interface User {
-  id: string; // MongoDB ObjectId as a string
+  id: string;
   username: string;
   name: string;
   profileImage: string;
 }
 
 interface SearchProps {
-  isOpen: boolean; // To control modal visibility
-  onRequestClose: () => void; // Function to close the modal
   userId: string; // MongoDB ObjectId as a string
+  onclose: (value: string | null) => void; 
   theme: {
     background: string;
     text: string;
@@ -53,26 +52,29 @@ const dummyUsers: User[] = [
   },
 ];
 
-const Search: React.FC<SearchProps> = ({ isOpen, onRequestClose, userId, theme }) => {
+const Search: React.FC<SearchProps> = ({ userId, theme, onclose }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Filter users based on the search term
-  const filteredUsers = dummyUsers.filter(user =>
+  const filteredUsers = dummyUsers.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (!isOpen) return null; // Don't render if not open
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
       <div
-        className="absolute inset-0 bg-black opacity-50"
-        onClick={onRequestClose} // Close on overlay click
-      />
-      <div
-        className="bg-white rounded-lg shadow-lg p-6 m-4 max-w-lg w-full"
+        className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full"
         style={{ backgroundColor: theme.background, color: theme.text }}
       >
+        {/* Close Button */}
+        <button 
+          onClick={() => onclose('userid')} // Close modal
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+          aria-label="Close Modal"
+        >
+          <FaTimes className="text-xl" /> {/* Close icon */}
+        </button>
+
         <h2 className="text-xl font-bold mb-4" style={{ color: theme.text }}>
           Search for Users
         </h2>
@@ -84,20 +86,20 @@ const Search: React.FC<SearchProps> = ({ isOpen, onRequestClose, userId, theme }
           className="w-full p-2 border border-gray-300 rounded mb-4"
         />
 
-        <div className="max-h-60 overflow-y-auto">
+        <div className="max-h-60 overflow-y-auto ">
           {filteredUsers.length > 0 ? (
-            filteredUsers.map(user => (
-              <div key={user.id} className="flex items-center p-2 rounded hover:bg-gray-100">
+            filteredUsers.map((user) => (
+              <div key={user.id} className="flex items-center p-2 rounded hover:bg-gray-100 transition duration-200 hover:text-black">
                 <img
                   src={user.profileImage}
                   alt={user.name}
                   className="w-10 h-10 rounded-full object-cover mr-3"
                 />
                 <div className="flex flex-col">
-                  <span className="text-base font-semibold" style={{ color: theme.text }}>
+                  <span className="text-base font-semibold hover:text-black">
                     {user.name}
                   </span>
-                  <span className="text-sm text-gray-500" style={{ color: theme.text }}>
+                  <span className="text-sm text-gray-500 hover:text-black">
                     @{user.username}
                   </span>
                 </div>
@@ -107,13 +109,6 @@ const Search: React.FC<SearchProps> = ({ isOpen, onRequestClose, userId, theme }
             <p className="text-gray-500">No users found</p>
           )}
         </div>
-
-        <button
-          onClick={onRequestClose}
-          className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          Close
-        </button>
       </div>
     </div>
   );

@@ -1,41 +1,39 @@
 "use client";
 import React, { useState } from 'react';
 
-interface AddPostProps {
-  userId: string;
+interface AddStoryProps {
+  userId: string; 
   theme: {
     background: string;
     text: string;
   };
-  onclose: (value: string | null) => void;
+  onclose: (value: string | null) => void; 
 }
 
-const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
-  const [postImage, setPostImage] = useState<string | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const [caption, setCaption] = useState<string>(''); // Caption state
+const AddStory: React.FC<AddStoryProps> = ({ userId, theme, onclose }) => {
+  const [storyImage, setStoryImage] = useState<string | null>(null); // Image file name
+  const [preview, setPreview] = useState<string | null>(null); // Image preview
 
-  // Handle image upload
+  // Handle image upload and preview
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPostImage(file.name);
+        setStoryImage(file.name);
         setPreview(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Handle submit
+  // Handle submit and pass the image to the backend or another function
   const handleSubmit = () => {
-    if (postImage && caption) {
-      console.log(`New post added by userId ${userId}:`, { postImage, caption });
-      // Call an API or perform an action to save the post associated with the userId
-      onclose('Post added');
+    if (storyImage) {
+      console.log(`New story added by userId ${userId}:`, storyImage);
+      onclose('Story added');
     } else {
-      alert("Please upload an image and write a caption to add a post.");
+      alert("Please upload an image to add a story");
     }
   };
 
@@ -47,22 +45,22 @@ const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
       >
         {/* Close Button */}
         <button
-          onClick={() => onclose(null)}
+          onClick={() => onclose(null)} // Close modal
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
           aria-label="Close Modal"
         >
           &times;
         </button>
 
-        <h2 className="text-xl font-bold mb-4">Add New Post</h2>
+        <h2 className="text-xl font-bold mb-4">Add New Story</h2>
 
         {/* Image Upload Input */}
         <div className="mb-4">
-          <label htmlFor="post-upload" className="block text-sm font-medium mb-2">
-            Upload your post image
+          <label htmlFor="story-upload" className="block text-sm font-medium mb-2">
+            Upload your story image
           </label>
           <input
-            id="post-upload"
+            id="story-upload"
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
@@ -74,24 +72,9 @@ const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
         {preview && (
           <div className="mb-4">
             <h3 className="text-sm font-medium">Preview:</h3>
-            <img src={preview} alt="Post preview" className="w-full h-60 object-cover mt-2 rounded-lg" />
+            <img src={preview} alt="Story preview" className="w-full h-60 object-cover mt-2 rounded-lg" />
           </div>
         )}
-
-        {/* Caption Input */}
-        <div className="mb-4">
-          <label htmlFor="caption" className="block text-sm font-medium mb-2">
-            Write a caption
-          </label>
-          <textarea
-            id="caption"
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
-            placeholder="Write your caption here..."
-            className="w-full p-2 border border-gray-300 rounded-lg mb-4 resize-none"
-            rows={4}
-          />
-        </div>
 
         {/* Submit Button */}
         <div className="flex justify-end">
@@ -99,7 +82,7 @@ const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
             onClick={handleSubmit}
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
-            Add Post
+            Add Story
           </button>
         </div>
       </div>
@@ -107,4 +90,4 @@ const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
   );
 };
 
-export default AddPost;
+export default AddStory;

@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import {
   FaHome,
   FaSearch,
@@ -14,6 +15,13 @@ import {
 import Link from 'next/link';
 import { IoCloseSharp } from 'react-icons/io5';
 import Image from 'next/image';
+import Search from './Search';
+import AddStory from './AddStory';
+import AddPost from './AddPost';
+import Message from './Message';
+import Notification from './Notification';
+import Profile from './Profile';
+import Settings from './Settings';
 
 // Define the props interface for the Sidebar component
 interface SidebarProps {
@@ -36,6 +44,32 @@ const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   toggleSidebar,
 }) => {
+  const [activeModal, setActiveModal] = useState<string | null>(null);
+
+  const onclose = () => {
+    setActiveModal(null);
+  };
+
+  // Navigation items with icons and modal paths
+  const navItems = [
+    { label: 'Home', icon: <FaHome size={25} />, path: 'home' },
+    { label: 'Search', icon: <FaSearch size={25} />, path: 'search' },
+    { label: 'Add Story', icon: <FaCamera size={25} />, path: 'addStory' },
+    { label: 'Create Post', icon: <FaPlusSquare size={25} />, path: 'create-post' },
+    { label: 'Messages', icon: <FaFacebookMessenger size={25} />, path: 'messages' },
+    { label: 'Notifications', icon: <FaBell size={25} />, path: 'notifications' },
+    { label: 'Profile', icon: <FaUser size={25} />, path: 'profile' },
+    { label: 'More', icon: <FaEllipsisH size={25} />, path: 'more' },
+  ];
+
+  const handleNavClick = (path: string) => {
+    if (path === 'home') {
+      window.location.reload();
+    } else {
+      setActiveModal(path);
+    }
+  };
+
   return (
     <div
       className={`fixed inset-0 z-30 transition-transform transform ${
@@ -65,32 +99,20 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Navigation Links */}
       <nav className="flex flex-col space-y-2">
-        {/* List of links with icons */}
-        {[
-          { href: '/', label: 'Home', icon: <FaHome size={25} /> },
-          { href: '/search', label: 'Search', icon: <FaSearch size={25} /> },
-          { href: '/galary', label: 'Add Story', icon: <FaCamera size={25} /> },
-          { href: '/create-post', label: 'Create Post', icon: <FaPlusSquare size={25} /> },
-          { href: '/messages', label: 'Messages', icon: <FaFacebookMessenger size={25} /> },
-          { href: '/notifications', label: 'Notifications', icon: <FaBell size={25} /> },
-          { href: '/profile', label: 'Profile', icon: <FaUser size={25} /> },
-          { href: '/more', label: 'More', icon: <FaEllipsisH size={25} /> },
-        ].map(({ href, label, icon }) => (
-          <Link
+        {navItems.map(({ label, icon, path }) => (
+          <button
             key={label}
-            href={href}
-            className="flex items-center p-2 hover:text-black rounded hover:bg-gray-300 duration-200 transition"
+            onClick={() => handleNavClick(path)}
+            className="flex items-center p-2 hover:text-black rounded hover:bg-gray-300 duration-200 transition w-full text-left"
             aria-label={label}
           >
-            {/* Icon with hover translation effect */}
             <span className="mr-3 transition-transform transform hover:translate-x-1">
               {icon}
             </span>
-            {/* Label with hover translation effect */}
             <span className="font-medium transition-transform transform hover:translate-x-1">
               {label}
             </span>
-          </Link>
+          </button>
         ))}
       </nav>
 
@@ -108,6 +130,15 @@ const Sidebar: React.FC<SidebarProps> = ({
           )}
         </button>
       </div>
+
+      {/* Render active modals if any */}
+      {activeModal === 'search' && <Search userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'addStory' && <AddStory userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'create-post' && <AddPost userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'messages' && <Message userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'notifications' && <Notification userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'profile' && <Profile userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'more' && <Settings userId="mongoo" theme={theme} onclose={onclose} />}
     </div>
   );
 };
