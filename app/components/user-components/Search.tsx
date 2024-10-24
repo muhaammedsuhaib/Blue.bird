@@ -1,6 +1,6 @@
-"use client";
 import React, { useState } from 'react';
-import { FaTimes } from 'react-icons/fa'; // Import the close icon
+import Modal from '../Modal';
+import Input from '../Input';
 
 interface User {
   id: string;
@@ -11,7 +11,7 @@ interface User {
 
 interface SearchProps {
   userId: string; // MongoDB ObjectId as a string
-  onclose: (value: string | null) => void; 
+  onclose: () => void; // Updated to only close the modal
   theme: {
     background: string;
     text: string;
@@ -61,56 +61,43 @@ const Search: React.FC<SearchProps> = ({ userId, theme, onclose }) => {
   );
 
   return (
-    <div className="fixed inset-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
-      <div
-        className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full"
-        style={{ backgroundColor: theme.background, color: theme.text }}
-      >
-        {/* Close Button */}
-        <button 
-          onClick={() => onclose('userid')} // Close modal
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-          aria-label="Close Modal"
-        >
-          <FaTimes className="text-xl" /> {/* Close icon */}
-        </button>
+    <Modal key={176876} onclose={onclose} theme={theme}>
+      <h2 className="text-xl font-bold mb-4" style={{ color: theme.text }}>
+        Search for Users
+      </h2>
+      <Input
+      key={1}
+        type="text"
+        placeholder="Search users..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded mb-4"
+      />
 
-        <h2 className="text-xl font-bold mb-4" style={{ color: theme.text }}>
-          Search for Users
-        </h2>
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-
-        <div className="max-h-60 overflow-y-auto ">
-          {filteredUsers.length > 0 ? (
-            filteredUsers.map((user) => (
-              <div key={user.id} className="flex items-center p-2 rounded hover:bg-gray-100 transition duration-200 hover:text-black">
-                <img
-                  src={user.profileImage}
-                  alt={user.name}
-                  className="w-10 h-10 rounded-full object-cover mr-3"
-                />
-                <div className="flex flex-col">
-                  <span className="text-base font-semibold hover:text-black">
-                    {user.name}
-                  </span>
-                  <span className="text-sm text-gray-500 hover:text-black">
-                    @{user.username}
-                  </span>
-                </div>
+      <div className="max-h-60 overflow-y-auto ">
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((user) => (
+            <div key={user.id} className="flex items-center p-2 rounded hover:bg-gray-100 transition duration-200 hover:text-black">
+              <img
+                src={user.profileImage}
+                alt={user.name}
+                className="w-10 h-10 rounded-full object-cover mr-3"
+              />
+              <div className="flex flex-col">
+                <span className="text-base font-semibold hover:text-black">
+                  {user.name}
+                </span>
+                <span className="text-sm text-gray-500 hover:text-black">
+                  @{user.username}
+                </span>
               </div>
-            ))
-          ) : (
-            <p className="text-gray-500">No users found</p>
-          )}
-        </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500">No users found</p>
+        )}
       </div>
-    </div>
+    </Modal>
   );
 };
 

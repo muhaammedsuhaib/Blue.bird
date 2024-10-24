@@ -132,13 +132,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Render active modals if any */}
-      {activeModal === 'search' && <Search userId="mongoo" theme={theme} onclose={onclose} />}
-      {activeModal === 'addStory' && <AddStory userId="mongoo" theme={theme} onclose={onclose} />}
-      {activeModal === 'create-post' && <AddPost userId="mongoo" theme={theme} onclose={onclose} />}
-      {activeModal === 'messages' && <Message userId="mongoo" theme={theme} onclose={onclose} />}
-      {activeModal === 'notifications' && <Notification userId="mongoo" theme={theme} onclose={onclose} />}
-      {activeModal === 'profile' && <Profile userId="mongoo" theme={theme} onclose={onclose} />}
-      {activeModal === 'more' && <Settings userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'search' && <Search key={Math.floor(Math.random() * 1000000)} userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'addStory' && <AddStory key={Math.floor(Math.random() * 1000000)} userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'create-post' && <AddPost key={Math.floor(Math.random() * 1000000)} userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'messages' && <Message key={Math.floor(Math.random() * 1000000)} userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'notifications' && <Notification key={Math.floor(Math.random() * 1000000)} userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'profile' && <Profile key={Math.floor(Math.random() * 1000000)}  userId="mongoo" theme={theme} onclose={onclose} />}
+      {activeModal === 'more' && <Settings key={Math.floor(Math.random() * 1000000)}  userId="mongoo" theme={theme} onclose={onclose} />}
     </div>
   );
 };

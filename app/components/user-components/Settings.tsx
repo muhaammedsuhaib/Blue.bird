@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Modal from '../Modal';
 
 interface SettingsProps {
   userId: string; // User ID for saving user settings
@@ -21,20 +22,7 @@ const Settings: React.FC<SettingsProps> = ({ userId, theme, onclose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
-      <div
-        className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative"
-        style={{ backgroundColor: theme.background, color: theme.text }}
-      >
-        {/* Close Button */}
-        <button
-          onClick={onclose} // Close modal
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-          aria-label="Close Settings"
-        >
-          &times;
-        </button>
-
+    <Modal key={15476} onclose={onclose} theme={theme}>
         <h2 className="text-xl font-bold mb-4">Settings</h2>
 
         {/* Notification Settings */}
@@ -85,8 +73,7 @@ const Settings: React.FC<SettingsProps> = ({ userId, theme, onclose }) => {
         >
           Save Settings
         </button>
-      </div>
-    </div>
+    </Modal>
   );
 };
 

@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Modal from '../Modal';
 
 interface ProfileProps {
   userId: string; // User ID for fetching user data
@@ -23,19 +24,7 @@ const Profile: React.FC<ProfileProps> = ({ userId, theme, onclose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
-      <div
-        className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative"
-        style={{ backgroundColor: theme.background, color: theme.text }}
-      >
-        {/* Close Button */}
-        <button
-          onClick={onclose} // Close modal
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-          aria-label="Close User Profile"
-        >
-          &times;
-        </button>
+    <Modal key={14353} onclose={onclose} theme={theme}>
 
         <h2 className="text-xl font-bold mb-4">User Profile</h2>
 
@@ -73,8 +62,7 @@ const Profile: React.FC<ProfileProps> = ({ userId, theme, onclose }) => {
         >
           Edit Profile
         </button>
-      </div>
-    </div>
+    </Modal>
   );
 };
 

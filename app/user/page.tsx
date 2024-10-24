@@ -32,6 +32,7 @@ const Userlayout: React.FC = () => {
 
       {/* Sidebar */}
       <Sidebar
+       key={Math.floor(Math.random() * 1000000)}
        darkMode={darkMode}
         theme={theme}
         toggleDarkMode={toggleDarkMode}
@@ -43,18 +44,18 @@ const Userlayout: React.FC = () => {
       <section className="flex-1 p-2 md:h-screen overflow-auto" style={{ backgroundColor: theme.background }}>
         {/* Story section */}
         <div className="rounded-lg mb-4" style={{ backgroundColor: theme.background }}>
-          <Story userId={'mongodbId...'} theme={theme} />
+          <Story key={Math.floor(Math.random() * 1000000)} userId={'mongodbId...'} theme={theme} />
         </div>
 
         {/* Posts section */}
         <div>
-          <Post userId={'mongodbId...'} theme={theme} />
+          <Post key={Math.floor(Math.random() * 1000000)} userId={'mongodbId...'} theme={theme} />
         </div>
       </section>
 
       {/* Suggestions Section */}
       <aside className="w-full md:w-1/4 p-4 md:h-screen overflow-auto hidden md:block" style={{ backgroundColor: theme.background }}>
-        <Suggestions userId={'mongo id'} theme={theme}/>
+        <Suggestions key={Math.floor(Math.random() * 1000000)} userId={'mongo id'} theme={theme}/>
       </aside>
     </main>
   );
