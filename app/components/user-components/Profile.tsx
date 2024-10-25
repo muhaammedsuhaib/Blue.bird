@@ -8,10 +8,9 @@ interface ProfileProps {
     background: string;
     text: string;
   };
-  onclose: () => void; // Close modal function
 }
 
-const Profile: React.FC<ProfileProps> = ({ userId, theme, onclose }) => {
+const Profile: React.FC<ProfileProps> = ({ userId, theme}) => {
   // Dummy user data
   const userData = {
     name: 'John Doe',
@@ -24,7 +23,7 @@ const Profile: React.FC<ProfileProps> = ({ userId, theme, onclose }) => {
   };
 
   return (
-    <Modal key={14353} onclose={onclose} theme={theme}>
+    <Modal key={14353}  theme={theme}>
 
         <h2 className="text-xl font-bold mb-4">User Profile</h2>
 

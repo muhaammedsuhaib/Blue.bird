@@ -21,10 +21,9 @@ interface MessageProps {
     background: string;
     text: string;
   };
-  onclose: () => void;
 }
 
-const Message: React.FC<MessageProps> = ({ userId, theme, onclose }) => {
+const Message: React.FC<MessageProps> = ({ userId, theme }) => {
   const [friends] = useState<Friend[]>([
     { id: 1, name: 'Alice' },
     { id: 2, name: 'Bob' },
@@ -69,7 +68,7 @@ const Message: React.FC<MessageProps> = ({ userId, theme, onclose }) => {
     : [];
 
   return (
-    <Modal key={398676}  onclose={onclose} theme={theme}>
+    <Modal key={398676}  theme={theme}>
       <h2 className="text-xl font-bold mb-4">Messages</h2>
 
       {!selectedFriend ? (

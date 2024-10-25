@@ -10,8 +10,7 @@ interface User {
 }
 
 interface SearchProps {
-  userId: string; // MongoDB ObjectId as a string
-  onclose: () => void; // Updated to only close the modal
+  userId: string; 
   theme: {
     background: string;
     text: string;
@@ -52,7 +51,7 @@ const dummyUsers: User[] = [
   },
 ];
 
-const Search: React.FC<SearchProps> = ({ userId, theme, onclose }) => {
+const Search: React.FC<SearchProps> = ({ userId, theme }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Filter users based on the search term
@@ -61,7 +60,7 @@ const Search: React.FC<SearchProps> = ({ userId, theme, onclose }) => {
   );
 
   return (
-    <Modal key={176876} onclose={onclose} theme={theme}>
+    <Modal key={176876}  theme={theme}>
       <h2 className="text-xl font-bold mb-4" style={{ color: theme.text }}>
         Search for Users
       </h2>

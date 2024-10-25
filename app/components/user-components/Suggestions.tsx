@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Button';
 import Link from 'next/link';
+import ProfileView from './ProfileView';
 
 interface UserSuggestion {
   id: string; // MongoDB ObjectId as a string
@@ -47,6 +48,12 @@ const dummySuggestions: UserSuggestion[] = [
 ];
 
 const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
+
+  const [openProfile,setOpenprofile]=useState<null | string>(null);
+
+  const handleopenProfile = (id:string)=>{
+    setOpenprofile(id);
+  }
   const handleFollow = (id: string) => {
     console.log(`User ${userId} followed user with ID: ${id}`);
   };
@@ -99,6 +106,7 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
             key={suggestion.id}
             className="flex items-center justify-between p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-gray-200"
             style={{ backgroundColor: theme.background }}
+            onClick={()=>handleopenProfile(suggestion.id)}
           >
             <div className="flex items-center space-x-4 w-full">
               <img
@@ -118,6 +126,7 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
           </div>
         ))}
       </div>
+      {openProfile&& <ProfileView onclose={()=>setOpenprofile(null)}  profileuserId={openProfile} theme={theme} userId={userId}/>}
       
       {/* Footer Links */}
       <div className="text-sm text-gray-500 mt-4">

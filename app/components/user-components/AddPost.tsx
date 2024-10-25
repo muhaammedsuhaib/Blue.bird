@@ -8,10 +8,9 @@ interface AddPostProps {
     background: string;
     text: string;
   };
-  onclose: (value: string | null) => void;
 }
 
-const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
+const AddPost: React.FC<AddPostProps> = ({ userId, theme }) => {
   const [postImage, setPostImage] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [caption, setCaption] = useState<string>(''); // Caption state
@@ -33,15 +32,14 @@ const AddPost: React.FC<AddPostProps> = ({ userId, theme, onclose }) => {
   const handleSubmit = () => {
     if (postImage && caption) {
       console.log(`New post added by userId ${userId}:`, { postImage, caption });
-      // Call an API or perform an action to save the post associated with the userId
-      onclose('Post added');
+
     } else {
       alert("Please upload an image and write a caption to add a post.");
     }
   };
 
   return (
-    <Modal key={23456} onclose={() => onclose(null)} theme={theme}>
+    <Modal key={23456}  theme={theme}>
       <h2 className="text-xl font-bold mb-4">Add New Post</h2>
 
       {/* Image Upload Input */}

@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 interface ModalProps {
-  onclose: () => void; // Changed to camelCase for consistency
   children: React.ReactNode; // Content of the modal
   theme: {
     background: string; // Background color
@@ -10,7 +10,7 @@ interface ModalProps {
   };
 }
 
-const Modal: React.FC<ModalProps> = ({ onclose, children, theme }) => {
+const Modal: React.FC<ModalProps> = ({  children, theme }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-50 p-4 md:p-8 transition-opacity duration-300 ease-in-out">
       <div
@@ -18,13 +18,13 @@ const Modal: React.FC<ModalProps> = ({ onclose, children, theme }) => {
         style={{ backgroundColor: theme.background, color: theme.text }}
       >
         {/* Close Button */}
-        <button
-          onClick={onclose}
+        <Link
+          href={`home`}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
           aria-label="Close Modal"
         >
           <FaTimes className="text-2xl" />
-        </button>
+        </Link>
 
         {/* Modal Content */}
         <div className="max-h-[80vh] overflow-auto">{children}</div>

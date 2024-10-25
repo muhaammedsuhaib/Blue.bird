@@ -1,4 +1,8 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
+import ProfileView from './ProfileView';
+import { FiHeart } from 'react-icons/fi'; // Import heart icon
+import CommentView from './CommentView';
 
 interface PostProps {
   userId: string;
@@ -10,7 +14,7 @@ interface PostProps {
 }
 
 interface PostData {
-  id: number;
+  id: string;
   title: string;
   content: string;
   imageUrl: string;
@@ -20,54 +24,118 @@ interface PostData {
 
 const demoPosts: PostData[] = [
   {
-    id: 1,
+    id: "1",
     title: "First Post",
     content: "This is the content of the first post.",
     imageUrl: "https://via.placeholder.com/600x400/92c952",
-    likes: 10,
-    comments: 5,
+    likes: 122220,
+    comments: 4245,
   },
   {
-    id: 2,
+    id: "2",
     title: "Second Post",
     content: "This is the content of the second post.",
-    imageUrl: "https://via.placeholder.com/600x400/771796",
-    likes: 20,
-    comments: 8,
-  },
-  {
-    id: 3,
-    title: "Third Post",
-    content: "This is the content of the third post.",
-    imageUrl: "https://via.placeholder.com/600x400/24f355",
-    likes: 15,
-    comments: 10,
-  },
-  {
-    id: 4,
-    title: "Fourth Post",
-    content: "This is the content of the fourth post.",
-    imageUrl: "https://via.placeholder.com/600x400/d32776",
-    likes: 8,
-    comments: 3,
-  },
+    imageUrl: "https://via.placeholder.com/600x400/92c952",
+    likes: 1000,
+    comments: 454355,
+  }
 ];
 
 const Post: React.FC<PostProps> = ({ userId, theme }) => {
-  
+  const [openProfile, setOpenProfile] = useState<null | string>(null);
+  const [openComments, setOpenComments] = useState<null | string>(null);
+  const [likes, setLikes] = useState<{ [key: string]: number }>({});
+
+  const handleOpenProfile = (id: string) => {
+    setOpenProfile(id);
+  };
+
+  const handleOpenComments = (id: string) => {
+    setOpenComments(id);
+  };
+
+  const handleLike = (postId: string) => {
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [postId]: (prevLikes[postId] || demoPosts.find(p => p.id === postId)?.likes || 0) + 1,
+    }));
+  };
+
   return (
     <div>
       {demoPosts.map((post) => (
-        <div key={post.id} className="rounded-lg shadow-md p-4 mb-4" style={{ backgroundColor: theme.background, color: theme.text }}>
+        <div
+          key={post.id}
+          className="rounded-lg shadow-md p-4 mb-6"
+          style={{ backgroundColor: theme.background, color: theme.text }}
+        >
+          {/* Profile Section */}
+          <div
+            className="flex items-center mb-4 cursor-pointer"
+            onClick={() => handleOpenProfile(post.id)}
+          >
+            <img
+              src={`https://via.placeholder.com/50/${post.id}00`} // Unique avatar per post
+              alt="User Profile"
+              className="rounded-full w-10 h-10 mr-3"
+            />
+            <div>
+              <h4 className="font-semibold">{`User ${userId}`}</h4>
+              <p className="text-sm text-gray-500">Posted on 25/10/2024</p>
+            </div>
+          </div>
+
+          {/* Post Image */}
+          <img
+            src={post.imageUrl}
+            alt={post.title}
+            className="w-full h-60 object-cover rounded-lg mb-4"
+          />
+
+          {/* Post Title and Content */}
           <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-          <img src={post.imageUrl} alt={post.title} className="w-full h-48 object-cover rounded mb-2" />
-          <p className=" mb-2">{post.content}</p>
-          <div className="flex justify-between text-sm">
-            <span>{post.likes} Likes</span>
-            <span>{post.comments} Comments</span>
+          <p className="mb-4">{post.content}</p>
+
+          {/* Likes and Comments */}
+          <div className="flex justify-between items-center text-sm">
+            <button
+              onClick={() => handleLike(post.id)}
+              className="flex items-center space-x-1 hover:text-red-500"
+              style={{ color: theme.textHover }}
+            >
+              <FiHeart className="text-lg" /> {/* Heart icon */}
+              <span>{likes[post.id] || post.likes} Likes</span>
+            </button>
+
+            <button
+              className="flex items-center space-x-1"
+              style={{ color: theme.textHover }}
+              onClick={() => handleOpenComments(post.id)}
+            >
+              <span>{post.comments} Comments</span>
+            </button>
           </div>
         </div>
       ))}
+
+      {/* Profile View Modal */}
+      {openProfile && (
+        <ProfileView
+          onclose={() => setOpenProfile(null)}
+          profileuserId={openProfile}
+          theme={theme}
+          userId={userId}
+        />
+      )}
+
+      {/* Comments View Modal */}
+      {openComments && (
+        <CommentView 
+          theme={theme} 
+          postId={openComments}
+          onclose={() => setOpenComments(null)}
+        />
+      )}
     </div>
   );
 };

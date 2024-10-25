@@ -8,21 +8,21 @@ interface SettingsProps {
     background: string;
     text: string;
   };
-  onclose: () => void; // Close modal function
+ 
 }
 
-const Settings: React.FC<SettingsProps> = ({ userId, theme, onclose }) => {
+const Settings: React.FC<SettingsProps> = ({ userId, theme }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [themePreference, setThemePreference] = useState<'light' | 'dark'>('light');
 
   const handleSaveSettings = () => {
     // Logic to save settings (API call can be added here)
     alert(`Settings saved successfully for user ID: ${userId}`);
-    onclose(); // Close the settings modal after saving
+  
   };
 
   return (
-    <Modal key={15476} onclose={onclose} theme={theme}>
+    <Modal key={15476}  theme={theme}>
         <h2 className="text-xl font-bold mb-4">Settings</h2>
 
         {/* Notification Settings */}

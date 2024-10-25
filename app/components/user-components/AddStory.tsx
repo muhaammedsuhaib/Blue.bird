@@ -7,10 +7,9 @@ interface AddStoryProps {
     background: string;
     text: string;
   };
-  onclose: (value: string | null) => void; 
 }
 
-const AddStory: React.FC<AddStoryProps> = ({ userId, theme, onclose }) => {
+const AddStory: React.FC<AddStoryProps> = ({ userId, theme }) => {
   const [storyImage, setStoryImage] = useState<string | null>(null); // Image file name
   const [preview, setPreview] = useState<string | null>(null); // Image preview
 
@@ -31,14 +30,13 @@ const AddStory: React.FC<AddStoryProps> = ({ userId, theme, onclose }) => {
   const handleSubmit = () => {
     if (storyImage) {
       console.log(`New story added by userId ${userId}:`, storyImage);
-      onclose('Story added');
     } else {
       alert("Please upload an image to add a story");
     }
   };
 
   return (
-    <Modal key={34567} onclose={() => onclose(null)} theme={theme}>
+    <Modal key={34567} theme={theme}>
       <h2 className="text-xl font-bold mb-4">Add New Story</h2>
 
       {/* Image Upload Input */}

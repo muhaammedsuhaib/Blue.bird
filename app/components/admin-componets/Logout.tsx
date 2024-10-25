@@ -1,12 +1,24 @@
 import React, { useState } from "react";
+import Button from "../Button";
 
-const Logout: React.FC<{ adminId: string; theme: any }> = ({ adminId, theme }) => {
+interface LogoutProps {
+  adminId: string;
+  theme: {
+    background: string;
+    text: string;
+    textHover: string;
+    buttonHover: string;
+    button: string;
+  };
+}
+
+const Logout: React.FC<LogoutProps> = ({ adminId, theme }) => {
+
   const [isConfirming, setIsConfirming] = useState<boolean>(false);
 
   const handleLogout = () => {
-    // Perform logout logic here, e.g., clearing tokens, redirecting, etc.
     console.log(`Admin ${adminId} has logged out`);
-    // Redirect to login page or perform any necessary cleanup
+   
   };
 
   return (
@@ -15,36 +27,32 @@ const Logout: React.FC<{ adminId: string; theme: any }> = ({ adminId, theme }) =
       <p className="mb-4">Are you sure you want to log out?</p>
 
       <div className="flex space-x-4">
-        <button
+        <Button
           onClick={() => setIsConfirming(true)}
-          className={`p-2 ${theme.button} ${theme.buttonHover} text-white rounded`}
-        >
-          Logout
-        </button>
-        <button
+          className={`p-2 ${theme.button} ${theme.buttonHover} ${theme.text}  rounded`}
+          label="Logout"
+        />
+        <Button
           onClick={() => setIsConfirming(false)}
-          className={`p-2 ${theme.button} ${theme.buttonHover} text-white rounded`}
-        >
-          Cancel
-        </button>
+          className={`p-2 ${theme.button} ${theme.buttonHover} rounded`}
+          label="Cancel"
+        />
       </div>
 
       {isConfirming && (
         <div className="mt-4">
           <p>Are you sure you want to log out?</p>
           <div className="flex space-x-4">
-            <button
+            <Button
               onClick={handleLogout}
+              label="Yes"
               className={`p-2 ${theme.button} ${theme.buttonHover} text-white rounded`}
-            >
-              Yes
-            </button>
-            <button
+           />
+            <Button
               onClick={() => setIsConfirming(false)}
+              label="No"
               className={`p-2 ${theme.button} ${theme.buttonHover} text-white rounded`}
-            >
-              No
-            </button>
+            />
           </div>
         </div>
       )}

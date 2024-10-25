@@ -95,7 +95,7 @@ const Story: React.FC<StoryProps> = ({ theme, userId }) => {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
 
   const handleClose = () => {
-    setSelectedStory(null); // Close the story view
+    setSelectedStory(null); 
   };
 
   return (

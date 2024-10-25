@@ -25,8 +25,8 @@ interface SidebarProps {
     background: string;
     text: string;
   };
-  setActivComponet: (modal: string) => void;
-  activcomponet:string;
+  pathurl:string;
+  adminId:string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -35,8 +35,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   toggleDarkMode,
   isOpen,
   toggleSidebar,
-  setActivComponet,
-  activcomponet
+  pathurl,
+  adminId,
 }) => {
   // Navigation items
   const navItems = [
@@ -50,11 +50,11 @@ const Sidebar: React.FC<SidebarProps> = ({
     { label: 'Logout', icon: <FaSignOutAlt />, path: 'logout' },
   ];
 
-  const handleNavClick = (path: string) => {
+  // const handleNavClick = (path: string) => {
 
-      setActivComponet(path);
+  //     setActivComponet(path);
 
-  };
+  // };
 
   return (
     <div
@@ -84,15 +84,17 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Navigation Links */}
       <nav className="flex flex-col space-y-2">
         {navItems.map(({ label, icon, path }) => (
-          <button
+           <Link  key={label} href={`${path}`} aria-label={label}  className={`flex  items-center p-2 rounded hover:text-black hover:bg-gray-300 transition duration-200 ${pathurl=== path && 'bg-gray-300 text-black' }`} >
+          {/* <button
             key={label}
             onClick={() => handleNavClick(path)}
-            className={`flex  items-center p-2 rounded hover:text-black hover:bg-gray-300 transition duration-200 ${activcomponet=== path && 'bg-gray-300 text-black' }`}
-            aria-label={label}
-          >
+            className={`flex  items-center p-2 rounded hover:text-black hover:bg-gray-300 transition duration-200 ${pathurl=== path && 'bg-gray-300 text-black' }`}
+            aria-label=
+          > */}
             <span className="mr-3">{icon}</span>
             <span className="font-medium">{label}</span>
-          </button>
+          {/* </button> */}
+          </Link>
         ))}
       </nav>
 

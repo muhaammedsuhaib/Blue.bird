@@ -15,10 +15,9 @@ interface NotificationProps {
     background: string;
     text: string;
   };
-  onclose: () => void; // Close modal function
 }
 
-const Notification: React.FC<NotificationProps> = ({ userId, theme, onclose }) => {
+const Notification: React.FC<NotificationProps> = ({ userId, theme }) => {
   // Dummy notifications data
   const [notifications, setNotifications] = useState<Notification[]>([
     { id: 1, message: "You have a new message from Alice.", timestamp: "10:30 AM" },
@@ -33,7 +32,7 @@ const Notification: React.FC<NotificationProps> = ({ userId, theme, onclose }) =
   };
 
   return (
-    <Modal key={157} onclose={onclose} theme={theme}>
+    <Modal key={157} theme={theme}>
       <h2 className="text-xl font-bold mb-4">Notifications for User: {userId}</h2>
 
       {/* Notification List */}
