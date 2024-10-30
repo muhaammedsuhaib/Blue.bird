@@ -20,7 +20,7 @@ export default function Home() {
           Connect, share, and discover with friends in an engaging social network!
         </p>
         <Link
-          href="/auth"
+          href="/auth/login"
           className="rounded-md px-6 py-3 text-lg font-semibold shadow-md transition-colors bg-indigo-600 text-white hover:bg-indigo-500"
           aria-label="Get started by signing up"
         >

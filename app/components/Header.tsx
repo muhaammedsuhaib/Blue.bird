@@ -16,7 +16,7 @@ const Header = () => {
         />
       </Link>
       <Link
-        href="/auth"
+        href="/auth/login"
         className="flex text-black items-center mx-4 text-lg hover:text-indigo-300"
         aria-label="Go to account page"
       >

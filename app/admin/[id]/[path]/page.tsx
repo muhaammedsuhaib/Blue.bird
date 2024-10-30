@@ -39,7 +39,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ params }) => {
       case "manage-posts":
         return <ManagePosts {...modalProps} />;
       case "analytics":
-        return <Analytics {...modalProps} />;
+        return <Analytics adminId={ "mngoo"} theme={theme} />;
       case "settings":
         return <Settings {...modalProps} />;
       case "messages":

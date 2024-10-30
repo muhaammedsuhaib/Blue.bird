@@ -106,13 +106,13 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
             key={suggestion.id}
             className="flex items-center justify-between p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-gray-200"
             style={{ backgroundColor: theme.background }}
-            onClick={()=>handleopenProfile(suggestion.id)}
           >
             <div className="flex items-center space-x-4 w-full">
               <img
                 src={suggestion.profileImage}
                 alt={suggestion.name}
                 className="w-12 h-12 rounded-full object-cover"
+                onClick={()=>handleopenProfile(suggestion.id)}
               />
               <span className="text-base truncate" style={{ color: theme.text, flexGrow: 1 }}>
                 {suggestion.name}
