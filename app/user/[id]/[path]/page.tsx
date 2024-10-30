@@ -24,13 +24,13 @@ interface UserLayoutProps {
 }
 
 const Userlayout: React.FC<UserLayoutProps> = ({ params }) => {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [mode, setmode] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const togglemode = () => setmode(!mode);
   const toggleSidebar = () => setIsOpen(!isOpen);
 
-  const theme = Theme(darkMode);
+  const theme = Theme(mode);
 
   return (
     <main
@@ -58,9 +58,9 @@ const Userlayout: React.FC<UserLayoutProps> = ({ params }) => {
       {/* Sidebar */}
       <Sidebar
         key={1}
-        darkMode={darkMode}
+        mode={mode}
         theme={theme}
-        toggleDarkMode={toggleDarkMode}
+        togglemode={togglemode}
         isOpen={isOpen}
         toggleSidebar={toggleSidebar}
         userId={params.id}

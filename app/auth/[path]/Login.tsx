@@ -6,6 +6,7 @@ import * as Yup from "yup"; // Make sure to import Yup for validation schema
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import Loading from "@/app/components/Loading";
+import { useRouter } from "next/navigation";
 
 type ErrorResponse = {
   message: string;
@@ -13,6 +14,7 @@ type ErrorResponse = {
 
 const Login: React.FC = () => {
   const [loading, setloading] = useState<Boolean>(false);
+  const router = useRouter();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -37,10 +39,14 @@ const Login: React.FC = () => {
           {
             email: values.email,
             password: values.password,
+          },
+          {
+            withCredentials: true,
           }
         );
         toast.success(response?.data?.message || "Login successful!");
         formik.resetForm();
+        router.push(`/user/${response?.data?.data?.user?.id}/home`);
       } catch (error) {
         const err = error as AxiosError<ErrorResponse>;
         toast.error(err?.response?.data?.message || "Login failed!");
@@ -54,7 +60,7 @@ const Login: React.FC = () => {
     console.log("Google signup clicked");
   };
 
-  if (loading) return <Loading />
+  if (loading) return <Loading />;
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm ">
       <form onSubmit={formik.handleSubmit} className="space-y-6">

@@ -15,18 +15,11 @@ import {
 import Link from "next/link";
 import { IoCloseSharp } from "react-icons/io5";
 import Image from "next/image";
-import Search from "./Search";
-import AddStory from "./AddStory";
-import AddPost from "./AddPost";
-import Message from "./Message";
-import Notification from "./Notification";
-import Profile from "./Profile";
-import Settings from "./Settings";
 
-// Define the props interface for the Sidebar component
+
 interface SidebarProps {
-  darkMode: boolean;
-  toggleDarkMode: () => void;
+  mode: boolean;
+  togglemode: () => void;
   isOpen: boolean;
   toggleSidebar: () => void;
   theme: {
@@ -40,9 +33,9 @@ interface SidebarProps {
 
 // The Sidebar component
 const Sidebar: React.FC<SidebarProps> = ({
-  darkMode,
+  mode,
   theme,
-  toggleDarkMode,
+  togglemode,
   isOpen,
   toggleSidebar,
   pathurl,
@@ -91,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Logo Section */}
       <Link href="/" aria-label="Go to Home">
         <Image
-          src={darkMode ? "/bluebird-white.png" : "/bglogo.png"}
+          src={mode ? "/bluebird-white.png" : "/bglogo.png"}
           alt="Blue Bird Logo"
           width={100}
           height={100}
@@ -123,11 +116,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Dark Mode Toggle */}
       <div className="mt-6">
         <button
-          onClick={toggleDarkMode}
+          onClick={togglemode}
           className="flex items-center justify-center w-full p-2 rounded transition duration-200 hover:text-black hover:bg-gray-300"
-          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          aria-label={mode ? "Switch to light mode" : "Switch to dark mode"}
         >
-          {darkMode ? (
+          {mode ? (
             <FaToggleOn
               size={30}
               className="transition-transform transform hover:translate-x-1"
