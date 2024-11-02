@@ -35,7 +35,7 @@ const Login: React.FC = () => {
       setloading(true);
       try {
         const response = await axios.post(
-          `https://blue-bird-hceo.onrender.com/api/auth/login`,
+          `https://blue-bird-server.onrender.com/api/auth/login`,
           {
             email: values.email,
             password: values.password,

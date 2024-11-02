@@ -38,7 +38,7 @@ const Registration: React.FC = () => {
     onSubmit: async (values) => {
       setloading(true);
       try {
-        const response = await axios.post(`https://blue-bird-hceo.onrender.com/api/auth/register`, {
+        const response = await axios.post(`https://blue-bird-server.onrender.com/api/auth/register`, {
           email: values.email,
           username:values.username,
           password: values.password,
