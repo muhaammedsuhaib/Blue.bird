@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authAxios = axios.create({
-  baseURL: "http://localhost:4500/api/auth",
+  baseURL: "https://blue-bird-server.onrender.com/api/auth",
   timeout: 10000,
   withCredentials: true,
 });
