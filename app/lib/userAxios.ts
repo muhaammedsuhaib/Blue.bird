@@ -6,7 +6,7 @@ import axios, {
 import Cookies from "js-cookie";
 
 const userAxios = axios.create({
-  baseURL: "http://localhost:4500/api",
+  baseURL: "https://blue-bird-server.onrender.com/api",
   timeout: 10000,
   withCredentials: true,
 });
