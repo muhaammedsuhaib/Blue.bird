@@ -4,9 +4,10 @@ import { useFormik } from "formik";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup"; // Make sure to import Yup for validation schema
-import axios, { AxiosError } from "axios";
+import  { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import Loading from "@/app/components/Loading";
+import axiosInstance from "@/app/lib/userAxios";
 
 type ErrorResponse = {
   message: string;
@@ -38,7 +39,7 @@ const Registration: React.FC = () => {
     onSubmit: async (values) => {
       setloading(true);
       try {
-        const response = await axios.post(`https://blue-bird-server.onrender.com/api/auth/register`, {
+        const response = await axiosInstance.post(`/auth/register`, {
           email: values.email,
           username:values.username,
           password: values.password,

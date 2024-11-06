@@ -1,8 +1,8 @@
-'use client';
-import React, { useState } from 'react';
-import ProfileView from './ProfileView';
-import { FiHeart } from 'react-icons/fi'; // Import heart icon
-import CommentView from './CommentView';
+"use client";
+import React, { useState } from "react";
+import ProfileView from "./ProfileView";
+import { FiHeart } from "react-icons/fi"; // Import heart icon
+import CommentView from "./CommentView";
 
 interface PostProps {
   userId: string;
@@ -38,7 +38,7 @@ const demoPosts: PostData[] = [
     imageUrl: "https://via.placeholder.com/600x400/92c952",
     likes: 1000,
     comments: 454355,
-  }
+  },
 ];
 
 const Post: React.FC<PostProps> = ({ userId, theme }) => {
@@ -57,7 +57,10 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
   const handleLike = (postId: string) => {
     setLikes((prevLikes) => ({
       ...prevLikes,
-      [postId]: (prevLikes[postId] || demoPosts.find(p => p.id === postId)?.likes || 0) + 1,
+      [postId]:
+        (prevLikes[postId] ||
+          demoPosts.find((p) => p.id === postId)?.likes ||
+          0) + 1,
     }));
   };
 
@@ -75,7 +78,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
             onClick={() => handleOpenProfile(post.id)}
           >
             <img
-              src={`https://via.placeholder.com/50/${post.id}00`} // Unique avatar per post
+              src={`https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg`} // Unique avatar per post
               alt="User Profile"
               className="rounded-full w-10 h-10 mr-3"
             />
@@ -122,7 +125,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
       {openProfile && (
         <ProfileView
           onclose={() => setOpenProfile(null)}
-          profileuserId={openProfile}
+          profileuserId={userId}
           theme={theme}
           userId={userId}
         />
@@ -130,8 +133,8 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
 
       {/* Comments View Modal */}
       {openComments && (
-        <CommentView 
-          theme={theme} 
+        <CommentView
+          theme={theme}
           postId={openComments}
           onclose={() => setOpenComments(null)}
         />

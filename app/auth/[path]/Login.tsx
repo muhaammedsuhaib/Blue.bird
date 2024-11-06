@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import Loading from "@/app/components/Loading";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/app/lib/userAxios";
 
 type ErrorResponse = {
   message: string;
@@ -34,8 +35,7 @@ const Login: React.FC = () => {
     onSubmit: async (values) => {
       setloading(true);
       try {
-        const response = await axios.post(
-          `https://blue-bird-server.onrender.com/api/auth/login`,
+        const response = await axiosInstance.post(`/auth/login`,
           {
             email: values.email,
             password: values.password,

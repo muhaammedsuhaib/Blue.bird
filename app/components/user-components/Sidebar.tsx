@@ -98,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <Link
             key={label}
             href={`${path}`}
-            className={`flex items-center p-2 hover:text-black rounded hover:bg-gray-300 duration-200 transition w-full text-left ${
+            className={`flex items-center p-2 hover:text-black rounded hover:bg-gray-300 duration-200 transition w-full text-left text-base truncate ${
               pathurl === path && "bg-gray-300 text-gray-600"
             }`}
             aria-label={label}
