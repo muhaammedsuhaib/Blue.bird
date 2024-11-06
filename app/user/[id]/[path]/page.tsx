@@ -69,7 +69,7 @@ const Userlayout: React.FC<UserLayoutProps> = ({ params }) => {
         pathurl={params.path}
       />
       {params.path === "search" && (
-        <Search key={1} userId={params.id} theme={theme} />
+        <Search key={18} userId={params.id} theme={theme} />
       )}
       {params.path === "addStory" && (
         <AddStory key={2} userId={params.id} theme={theme} />

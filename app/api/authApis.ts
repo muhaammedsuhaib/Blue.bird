@@ -1,8 +1,10 @@
 import authAxios from "../lib/authAxios";
 import { LoginResponse, RegistrResponse } from "../types/auth";
-import { User } from "../types/user";
 
-export const login = async (email: string, password: string): Promise<LoginResponse> => {
+export const login = async (
+  email: string,
+  password: string
+): Promise<LoginResponse> => {
   try {
     const response = await authAxios.post(
       "/login",
@@ -16,12 +18,17 @@ export const login = async (email: string, password: string): Promise<LoginRespo
     throw error;
   }
 };
-export const registration = async (username: string, email: string, password: string): Promise<RegistrResponse> => {
+export const registration = async (
+  username: string,
+  email: string,
+  password: string
+): Promise<RegistrResponse> => {
   try {
-    const response = await authAxios.post(
-      "/register",
-      { username,email, password }
-    );
+    const response = await authAxios.post("/register", {
+      username,
+      email,
+      password,
+    });
 
     return response.data as RegistrResponse;
   } catch (error) {
