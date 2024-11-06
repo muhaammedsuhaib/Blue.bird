@@ -15,6 +15,7 @@ import Settings from "@/app/components/user-components/Settings";
 import Notification from "@/app/components/user-components/Notification";
 import Image from "next/image";
 import { FaBars } from "react-icons/fa";
+import useMode from "@/app/hooks/useMode";
 
 interface UserLayoutProps {
   params: {
@@ -24,10 +25,11 @@ interface UserLayoutProps {
 }
 
 const Userlayout: React.FC<UserLayoutProps> = ({ params }) => {
-  const [mode, setmode] = useState<boolean>(false);
+  const [mode, setMode] = useMode();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const togglemode = () => setmode(!mode);
+  const togglemode = () => setMode(!mode);
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const theme = Theme(mode);

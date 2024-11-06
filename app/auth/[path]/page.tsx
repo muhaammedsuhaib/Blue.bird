@@ -7,6 +7,7 @@ import { BsFillMoonStarsFill } from "react-icons/bs";
 import { Theme } from "@/app/utils/Theme";
 import Registration from "./Registration";
 import Login from "./Login";
+import useMode from "@/app/hooks/useMode";
 
 interface AuthProps {
   params: {
@@ -14,21 +15,7 @@ interface AuthProps {
   };
 }
 const Auth: React.FC<AuthProps> = ({ params }) => {
-
-  const [mode, setmode] = useState<boolean>(false);
-
-  useEffect(() => {
-    const savedmode = localStorage.getItem("mode");
-    if (savedmode === "true") {
-      setmode(true);
-    } else {
-      setmode(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("mode", JSON.stringify(mode));
-  }, [mode]);
+  const [mode, setMode] = useMode();
 
   const them = Theme(mode);
 
@@ -51,7 +38,7 @@ const Auth: React.FC<AuthProps> = ({ params }) => {
 
             <button
               className="flex items-center gap-2 text-end  rounded-md p-4 "
-              onClick={() => setmode(!mode)}
+              onClick={() => setMode(!mode)}
             >
               {!mode ? (
                 <BsFillMoonStarsFill className="text-black" size={30} />
@@ -85,7 +72,9 @@ const Auth: React.FC<AuthProps> = ({ params }) => {
                 </div>
 
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
-                  {params.path === "login"? "Log into existing account": "Create new account"}
+                  {params.path === "login"
+                    ? "Log into existing account"
+                    : "Create new account"}
                 </h2>
               </div>
               {params.path === "login" ? <Login /> : <Registration />}

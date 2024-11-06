@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-import * as Yup from "yup"; // Make sure to import Yup for validation schema
-import axios, { AxiosError } from "axios";
+import * as Yup from "yup";
+import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import Loading from "@/app/components/Loading";
 import { useRouter } from "next/navigation";
-import axiosInstance from "@/app/lib/userAxios";
+import { login } from "@/app/api/authApis";
+import { useMutation } from "@tanstack/react-query";
+import { LoginResponse } from "@/app/types/auth";
 
 type ErrorResponse = {
   message: string;
 };
 
 const Login: React.FC = () => {
-  const [loading, setloading] = useState<Boolean>(false);
   const router = useRouter();
 
   const validationSchema = Yup.object({
@@ -26,41 +27,39 @@ const Login: React.FC = () => {
       .required("Password is required"),
   });
 
+  const { mutate, isPending } = useMutation<
+    LoginResponse,
+    AxiosError<ErrorResponse>,
+    { email: string; password: string }
+  >({
+    mutationFn: async (values: { email: string; password: string }) => {
+      const response = await login(values.email, values.password);
+      return response;
+    },
+    onSuccess: (response) => {
+      toast.success(response?.message || "Login successful!");
+      router.push(`/user/${response?.data?.user._id}/home`);
+    },
+    onError: (error: AxiosError<ErrorResponse>) => {
+      const errorMessage = error?.response?.data?.message || "Login failed!";
+      toast.error(errorMessage);
+    },
+  });
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      setloading(true);
-      try {
-        const response = await axiosInstance.post(`/auth/login`,
-          {
-            email: values.email,
-            password: values.password,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-        toast.success(response?.data?.message || "Login successful!");
-        formik.resetForm();
-        router.push(`/user/${response?.data?.data?.user?.id}/home`);
-      } catch (error) {
-        const err = error as AxiosError<ErrorResponse>;
-        toast.error(err?.response?.data?.message || "Login failed!");
-      } finally {
-        setloading(false);
-      }
-    },
+    onSubmit: (values) => mutate(values),
   });
 
   const handleGoogleSignup = () => {
     console.log("Google signup clicked");
   };
 
-  if (loading) return <Loading />;
+  if (isPending) return <Loading />;
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm ">
       <form onSubmit={formik.handleSubmit} className="space-y-6">
