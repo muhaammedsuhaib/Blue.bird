@@ -3,10 +3,10 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 interface ModalProps {
-  children: React.ReactNode; // Content of the modal
+  children: React.ReactNode;
   theme: {
-    background: string; // Background color
-    text: string; // Text color
+    background: string;
+    text: string; 
   };
 }
 
@@ -20,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({  children, theme }) => {
         {/* Close Button */}
         <Link
           href={`home`}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-600"
           aria-label="Close Modal"
         >
           <FaTimes className="text-2xl" />

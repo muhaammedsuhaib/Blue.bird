@@ -1,4 +1,5 @@
 import userAxios from "../lib/userAxios";
+import { CreatePostResponse } from "../types/post";
 import { User } from "../types/user";
 
 export const fetchProfile = async (id: string): Promise<User> => {
@@ -15,6 +16,20 @@ export const searchUsers = async (id: string, query: string): Promise<any> => {
     return response.data.data;
   } catch (error) {
     console.error("Error fetching search results:", error);
-    return []; 
+    return [];
+  }
+};
+
+export const createPost = async (
+  formData: FormData
+): Promise<CreatePostResponse> => {
+  try {
+    const response = await userAxios.post("/user/post", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data as CreatePostResponse;
+  } catch (error) {
+    console.error("Post creation failed:", error);
+    throw error;
   }
 };
