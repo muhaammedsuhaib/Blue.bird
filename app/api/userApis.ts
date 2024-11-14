@@ -1,5 +1,11 @@
 import userAxios from "../lib/userAxios";
-import { CreatePostResponse } from "../types/post";
+import { CreateCommentResponse } from "../types/comment";
+import {
+  CreatePostResponse,
+  GetPostResponse,
+  GetuniquePostResponse,
+  Post,
+} from "../types/post";
 import { User } from "../types/user";
 
 export const fetchProfile = async (id: string): Promise<User> => {
@@ -24,10 +30,54 @@ export const createPost = async (
   formData: FormData
 ): Promise<CreatePostResponse> => {
   try {
-    const response = await userAxios.post("/user/post", formData, {
+    const response = await userAxios.post("/post", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return response.data as CreatePostResponse;
+  } catch (error) {
+    console.error("Post creation failed:", error);
+    throw error;
+  }
+};
+export const fetchPosts = async (): Promise<GetPostResponse[]> => {
+  const response = await userAxios.get("/post");
+  return response.data.data;
+};
+export const uniquePost = async (
+  id: string
+): Promise<GetuniquePostResponse> => {
+  const response = await userAxios.get(`/post/${id}`);
+  return response.data.data;
+};
+export const addComment = async (
+  authorId: string,
+  content: string,
+  postId: string
+): Promise<CreateCommentResponse> => {
+  try {
+    const response = await userAxios.post("/comment", {
+      authorId,
+      content,
+      postId,
+    });
+    return response.data as CreateCommentResponse;
+  } catch (error) {
+    console.error("Post creation failed:", error);
+    throw error;
+  }
+};
+export const replyComment = async (
+  authorId: string,
+  content: string,
+  commentId: string
+): Promise<CreateCommentResponse> => {
+  try {
+    const response = await userAxios.post("/comment/reply", {
+      authorId,
+      content,
+      commentId,
+    });
+    return response.data as CreateCommentResponse;
   } catch (error) {
     console.error("Post creation failed:", error);
     throw error;

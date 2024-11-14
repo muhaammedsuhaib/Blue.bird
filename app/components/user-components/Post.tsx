@@ -1,8 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import ProfileView from "./ProfileView";
-import { FiHeart } from "react-icons/fi"; // Import heart icon
-import CommentView from "./CommentView";
+import { FiHeart } from "react-icons/fi";
+import { fetchPosts } from "@/app/api/userApis";
+import { useQuery } from "@tanstack/react-query";
+import { GetPostResponse } from "@/app/types/post";
+import { formatDate } from "@/app/utils/formatDate";
+import Loading from "../Loading";
+import PostView from "./PostView";
+import { MdComment } from "react-icons/md";
 
 interface PostProps {
   userId: string;
@@ -13,109 +19,76 @@ interface PostProps {
   };
 }
 
-interface PostData {
-  id: string;
-  title: string;
-  content: string;
-  imageUrl: string;
-  likes: number;
-  comments: number;
-}
-
-const demoPosts: PostData[] = [
-  {
-    id: "1",
-    title: "First Post",
-    content: "This is the content of the first post.",
-    imageUrl: "https://via.placeholder.com/600x400/92c952",
-    likes: 122220,
-    comments: 4245,
-  },
-  {
-    id: "2",
-    title: "Second Post",
-    content: "This is the content of the second post.",
-    imageUrl: "https://via.placeholder.com/600x400/92c952",
-    likes: 1000,
-    comments: 454355,
-  },
-];
-
 const Post: React.FC<PostProps> = ({ userId, theme }) => {
   const [openProfile, setOpenProfile] = useState<null | string>(null);
-  const [openComments, setOpenComments] = useState<null | string>(null);
-  const [likes, setLikes] = useState<{ [key: string]: number }>({});
+  const [openPost, setOpenPost] = useState<null | string>(null);
+
+  const { data: posts, isLoading: postLoading } = useQuery<GetPostResponse[]>({
+    queryKey: ["fetchposts"],
+    queryFn: () => fetchPosts(),
+    enabled: !!userId,
+  });
 
   const handleOpenProfile = (id: string) => {
     setOpenProfile(id);
   };
 
-  const handleOpenComments = (id: string) => {
-    setOpenComments(id);
+  const handleOpenPost = (id: string) => {
+    setOpenPost(id);
   };
-
-  const handleLike = (postId: string) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [postId]:
-        (prevLikes[postId] ||
-          demoPosts.find((p) => p.id === postId)?.likes ||
-          0) + 1,
-    }));
-  };
-
+  if (postLoading) return <Loading />;
   return (
     <div>
-      {demoPosts.map((post) => (
+      {posts?.map((post) => (
         <div
-          key={post.id}
+          key={post._id}
           className="rounded-lg shadow-md p-4 mb-6"
           style={{ backgroundColor: theme.background, color: theme.text }}
         >
-          {/* Profile Section */}
           <div
             className="flex items-center mb-4 cursor-pointer"
-            onClick={() => handleOpenProfile(post.id)}
+            onClick={() => handleOpenProfile(post._id)}
           >
             <img
-              src={`https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg`} // Unique avatar per post
+              src={post.author.profilePicture}
               alt="User Profile"
               className="rounded-full w-10 h-10 mr-3"
             />
             <div>
-              <h4 className="font-semibold">{`User ${userId}`}</h4>
-              <p className="text-sm text-gray-500">Posted on 25/10/2024</p>
+              <h4 className="font-semibold">{post.author.username}</h4>
+              <p className="text-sm text-gray-500">
+                {formatDate(post.createdAt)}
+              </p>
             </div>
           </div>
 
           {/* Post Image */}
           <img
-            src={post.imageUrl}
-            alt={post.title}
-            className="w-full h-60 object-cover rounded-lg mb-4"
+            src={post.content}
+            alt={post.description}
+            className="w-full h-[400px] object-cover rounded-lg mb-4"
+            onClick={() => handleOpenPost(post._id)}
           />
 
-          {/* Post Title and Content */}
-          <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-          <p className="mb-4">{post.content}</p>
+          <p className="mb-4">{post.description}</p>
 
-          {/* Likes and Comments */}
           <div className="flex justify-between items-center text-sm">
             <button
-              onClick={() => handleLike(post.id)}
+              // onClick={() => handleLike(post._id)}
               className="flex items-center space-x-1 hover:text-red-500"
               style={{ color: theme.textHover }}
             >
-              <FiHeart className="text-lg" /> {/* Heart icon */}
-              <span>{likes[post.id] || post.likes} Likes</span>
+              <FiHeart className="text-lg" />
+              <span>{post.likes?.length} Likes</span>
             </button>
 
             <button
               className="flex items-center space-x-1"
               style={{ color: theme.textHover }}
-              onClick={() => handleOpenComments(post.id)}
+              onClick={() => handleOpenPost(post._id)}
             >
-              <span>{post.comments} Comments</span>
+              <MdComment className="text-lg" />
+              <span>{post.comments?.length} comments</span>
             </button>
           </div>
         </div>
@@ -131,12 +104,13 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
         />
       )}
 
-      {/* Comments View Modal */}
-      {openComments && (
-        <CommentView
+      {/* Post View Modal */}
+      {openPost && (
+        <PostView
+          userId={userId}
           theme={theme}
-          postId={openComments}
-          onclose={() => setOpenComments(null)}
+          postId={openPost}
+          onclose={() => setOpenPost(null)}
         />
       )}
     </div>
