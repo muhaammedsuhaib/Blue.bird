@@ -37,14 +37,6 @@ const AddPost: React.FC<AddPostProps> = ({ userId, theme }) => {
         return;
       }
 
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        setPostImage(null);
-        setPreview(null);
-        toast.error("File size exceeds the 5MB limit.");
-        return;
-      }
-
       const reader = new FileReader();
       reader.onloadend = () => {
         setPostImage(file);
