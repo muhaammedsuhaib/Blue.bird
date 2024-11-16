@@ -15,3 +15,7 @@ export interface User {
   updatedAt: Date;
   __v?: number;
 }
+export interface FollowResponse {
+  message: string;
+  data: User;
+}

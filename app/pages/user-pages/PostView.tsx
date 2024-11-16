@@ -10,7 +10,6 @@ import { BiSolidSend } from "react-icons/bi";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { CreateCommentResponse } from "@/app/types/comment";
-import { ErrorResponse } from "@/app/types/commen";
 
 interface PostViewProps {
   theme: {
@@ -102,7 +101,7 @@ const PostView: React.FC<PostViewProps> = ({
   if (postLoading) return <Loading />;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen  bg-opacity-50 p-4 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen  bg-opacity-50 p-4 overflow-y-auto bg-black md:p-8 transition-opacity duration-300 ease-in-out">
       <div
         className="relative w-full max-w-3xl lg:max-w-5xl bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8"
         style={{ backgroundColor: theme.background, color: theme.text }}
@@ -134,7 +133,10 @@ const PostView: React.FC<PostViewProps> = ({
               <div>
                 <p className="font-semibold">{post?.author.username}</p>
                 <p className="text-sm text-gray-300">
-                  Posted on: {post?.createdAt ? formatDate(post.createdAt) : post?.createdAt}
+                  Posted on:{" "}
+                  {post?.createdAt
+                    ? formatDate(post.createdAt)
+                    : post?.createdAt}
                 </p>
               </div>
             </div>

@@ -3,9 +3,15 @@ import Button from "../../components/Button";
 import Link from "next/link";
 import ProfileView from "./ProfileView";
 import Loading from "../../components/Loading";
-import { User } from "@/app/types/user";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProfile, fetchSuggestions } from "@/app/api/userApis";
+import { FollowResponse, User } from "@/app/types/user";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  fetchProfile,
+  fetchSuggestions,
+  toggleFollow,
+} from "@/app/api/userApis";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 interface SuggestionsProps {
   userId: string;
@@ -18,6 +24,7 @@ interface SuggestionsProps {
 
 const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
   const [openProfile, setOpenprofile] = useState<null | string>(null);
+  const queryClient = useQueryClient();
 
   const { data: user, isLoading: profileloading } = useQuery({
     queryKey: ["userProfile", userId],
@@ -30,12 +37,35 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
     enabled: !!userId,
   });
 
+  const followToggle = useMutation<
+    FollowResponse,
+    AxiosError,
+    { userId: string; targetId: string }
+  >({
+    mutationFn: async ({ userId, targetId }) => {
+      const response = await toggleFollow(userId, targetId);
+      return response;
+    },
+    onSuccess: (response) => {
+      toast.success(response.message || "Comment created successfully!");
+      queryClient.invalidateQueries({ queryKey: ["userProfile", userId] });
+      queryClient.invalidateQueries({
+        queryKey: ["suggestionsProfiles", userId],
+      });
+    },
+    onError: (error: AxiosError<any>) => {
+      const errorMessage =
+        error?.response?.data?.message || "Failed to Follow!";
+      toast.error(errorMessage);
+    },
+  });
+
   const handleOpenProfile = (id: string) => {
     setOpenprofile(id);
   };
 
   const handleFollow = (id: string) => {
-    console.log(`User ${userId} followed user with ID: ${id}`);
+    followToggle.mutate({ userId, targetId: id });
   };
   if (profileloading) return <Loading message="Profile loading..." />;
   if (suggestionsloading) return <Loading message="Suggestions loading..." />;
@@ -105,7 +135,11 @@ const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
                   {suggestion?.username}
                 </span>
                 <Button
-                  label="Follow"
+                  label={
+                    user?.following.includes(suggestion?._id)
+                      ? "Unfollow"
+                      : "Follow"
+                  }
                   onClick={() => handleFollow(suggestion?._id)}
                   className="px-2 py-1 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
                 />
