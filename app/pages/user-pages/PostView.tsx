@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaReply, FaTimes } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 import { uniquePost, addComment, replyComment } from "@/app/api/userApis";
 import { formatDate } from "@/app/utils/formatDate";
 import { GetuniquePostResponse } from "@/app/types/post";

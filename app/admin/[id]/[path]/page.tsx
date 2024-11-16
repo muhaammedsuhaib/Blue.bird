@@ -2,15 +2,15 @@
 
 import React, { useState } from "react";
 import { Theme } from "../../../utils/Theme";
-import Sidebar from "../../../components/admin-componets/Sidebar";
-import AdminHome from "../../../components/admin-componets/AdminHome";
-import ManageUsers from "../../../components/admin-componets/ManageUsers";
-import ManagePosts from "../../../components/admin-componets/ManagePosts";
-import Analytics from "../../../components/admin-componets/Analytics";
-import Settings from "../../../components/admin-componets/Settings";
-import Messages from "../../../components/admin-componets/Messages";
-import Notifications from "../../../components/admin-componets/Notifications";
-import Logout from "../../../components/admin-componets/Logout";
+import Sidebar from "../../../pages/admin-pages/Sidebar";
+import AdminHome from "../../../pages/admin-pages/AdminHome";
+import ManageUsers from "../../../pages/admin-pages/ManageUsers";
+import ManagePosts from "../../../pages/admin-pages/ManagePosts";
+import Analytics from "../../../pages/admin-pages/Analytics";
+import Settings from "../../../pages/admin-pages/Settings";
+import Messages from "../../../pages/admin-pages/Messages";
+import Notifications from "../../../pages/admin-pages/Notifications";
+import Logout from "../../../pages/admin-pages/Logout";
 import Button from "@/app/components/Button";
 
 interface AdminLayoutProps {

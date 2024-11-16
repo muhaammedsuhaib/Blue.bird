@@ -1,6 +1,6 @@
 // Message.tsx
 import React, { useState } from 'react';
-import Modal from '../Modal';
+import Modal from '../../components/Modal';
 
 interface Message {
   id: number;

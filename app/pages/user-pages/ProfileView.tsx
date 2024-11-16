@@ -1,6 +1,6 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProfile } from "@/app/api/userApis";
 

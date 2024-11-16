@@ -1,7 +1,7 @@
 // Notification.tsx
 "use client";
 import React, { useState } from 'react';
-import Modal from '../Modal';
+import Modal from '../../components/Modal';
 
 interface Notification {
   id: number;

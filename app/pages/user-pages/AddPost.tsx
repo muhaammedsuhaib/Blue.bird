@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../../components/Modal";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "@/app/types/commen";
@@ -8,7 +8,7 @@ import { CreatePostResponse } from "@/app/types/post";
 import toast from "react-hot-toast";
 import { createPost } from "@/app/api/userApis";
 import { useRouter } from "next/navigation";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 
 interface AddPostProps {
   userId: string;

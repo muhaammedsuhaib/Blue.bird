@@ -6,7 +6,7 @@ import { fetchPosts } from "@/app/api/userApis";
 import { useQuery } from "@tanstack/react-query";
 import { GetPostResponse } from "@/app/types/post";
 import { formatDate } from "@/app/utils/formatDate";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 import PostView from "./PostView";
 import { MdComment } from "react-icons/md";
 

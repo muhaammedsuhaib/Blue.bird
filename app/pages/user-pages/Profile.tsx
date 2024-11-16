@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import Modal from '../Modal';
+import Modal from '../../components/Modal';
 
 interface ProfileProps {
   userId: string; // User ID for fetching user data

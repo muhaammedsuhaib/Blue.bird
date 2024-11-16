@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Button from "../Button";
+import Button from "../../components/Button";
 import Link from "next/link";
 import ProfileView from "./ProfileView";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 import { User } from "@/app/types/user";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProfile, fetchSuggestions } from "@/app/api/userApis";

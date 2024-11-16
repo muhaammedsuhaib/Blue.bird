@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Modal";
-import Input from "../Input";
+import Modal from "../../components/Modal";
+import Input from "../../components/Input";
 import { useQuery } from "@tanstack/react-query";
 import { searchUsers } from "@/app/api/userApis";
 import { User } from "@/app/types/user";
