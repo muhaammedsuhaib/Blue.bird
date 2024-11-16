@@ -1,28 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { RiAccountCircleFill } from "react-icons/ri";
 
 const Header = () => {
   return (
-    <header className="text-white py-4">
-      <nav className="container mx-auto flex justify-between items-center px-6">
-        <Link href="/">
+    <header className="py-4 w-full max-w-5xl px-4 mx-auto">
+      <nav
+        className="flex justify-between items-center"
+        role="navigation"
+        aria-label="Main Navigation"
+      >
+        <Link href="/" aria-label="Home">
           <Image
             src="/bglogo.png"
             alt="Blue Bird Logo"
-            width={70}
-            height={70}
+            width={100}
+            height={100}
+            priority
+            className="hover:opacity-90 transition-opacity duration-200  hover:scale-105"
           />
         </Link>
         <Link
           href="/auth/login"
-          className="flex text-black items-center mx-4 text-lg hover:text-indigo-300"
+          className="flex items-center text-black text-lg bg-blue-200 rounded-full p-2 hover:bg-blue-300 transition-colors duration-200 focus:ring-2 focus:ring-blue-400  hover:scale-105"
           aria-label="Go to account page"
         >
-          <FaUser className="mr-2" aria-hidden="true" size={20} />{" "}
-          {/* User Icon */}
-          <span className="hidden sm:block"> Go to account</span>
+          <RiAccountCircleFill
+            className="md:mr-2"
+            aria-hidden="true"
+            size={28}
+          />
+          <span className="hidden sm:block font-medium">Account</span>
         </Link>
       </nav>
     </header>
