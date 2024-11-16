@@ -6,7 +6,7 @@ import {
   GetuniquePostResponse,
   Post,
 } from "../types/post";
-import { User } from "../types/user";
+import { FollowResponse, User } from "../types/user";
 
 export const fetchProfile = async (id: string): Promise<User> => {
   const response = await userAxios.get(`/user/${id}`);
@@ -80,6 +80,15 @@ export const replyComment = async (
     return response.data as CreateCommentResponse;
   } catch (error) {
     console.error("Post creation failed:", error);
+    throw error;
+  }
+};
+export const toggleFollow = async ( userId:string, targetId:string): Promise<FollowResponse> => {
+  try {
+    const response = await userAxios.post("/user/togglefollow", { userId, targetId   });
+    return response.data as FollowResponse;
+  } catch (error) {
+    console.error("Follow or Unfollow creation failed:", error);
     throw error;
   }
 };
