@@ -46,11 +46,11 @@ const Registration: React.FC = () => {
       return response;
     },
     onSuccess: (response) => {
-      toast.success(response?.message || "Login successful!");
+      toast.success(response?.message || "Registration successful!");
       router.push(`login`);
     },
     onError: (error: AxiosError<ErrorResponse>) => {
-      const errorMessage = error?.response?.data?.message || "Login failed!";
+      const errorMessage = error?.response?.data?.message || "Registration failed!";
       toast.error(errorMessage);
     },
   });

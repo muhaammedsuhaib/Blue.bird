@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import React from "react";
 import { FaReply, FaTimes } from "react-icons/fa";
+import { BiSolidSend } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
 import Loading from "../../components/Loading";
-import { uniquePost, addComment, replyComment } from "@/app/api/userApis";
 import { formatDate } from "@/app/utils/formatDate";
-import { GetuniquePostResponse } from "@/app/types/post";
-import { BiSolidSend } from "react-icons/bi";
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
-import { CreateCommentResponse } from "@/app/types/comment";
+import usePost from "@/app/hooks/usePost";
+import useCommentActions from "@/app/hooks/useCommentActions";
+import Button from "@/app/components/Button";
 
 interface PostViewProps {
   theme: {
@@ -28,82 +25,25 @@ const PostView: React.FC<PostViewProps> = ({
   onclose,
   userId,
 }) => {
-  const queryClient = useQueryClient();
-  const { data: post, isLoading: postLoading } =
-    useQuery<GetuniquePostResponse>({
-      queryKey: ["uniquePost", postId],
-      queryFn: () => uniquePost(postId),
-      enabled: !!postId,
-    });
+  const { data: post, isLoading: postLoading } = usePost(postId);
 
-  const [newComment, setNewComment] = useState("");
-  const [replyContent, setReplyContent] = useState("");
-  const [activeReply, setActiveReply] = useState<string | null>(null);
-
-  const addCommentMutation = useMutation<
-    CreateCommentResponse,
-    AxiosError,
-    { authorId: string; content: string; postId: string }
-  >({
-    mutationFn: async ({ authorId, content, postId }) => {
-      const response = await addComment(authorId, content, postId);
-      return response;
-    },
-    onSuccess: (response) => {
-      toast.success(response.message || "Comment created successfully!");
-      setNewComment("");
-      queryClient.invalidateQueries({ queryKey: ["uniquePost", postId] });
-    },
-    onError: (error: AxiosError<any>) => {
-      const errorMessage =
-        error?.response?.data?.message || "Failed to create post!";
-      toast.error(errorMessage);
-    },
-  });
-
-  const addReplyMutation = useMutation<
-    CreateCommentResponse,
-    AxiosError,
-    { authorId: string; content: string; commentId: string }
-  >({
-    mutationFn: async ({ authorId, content, commentId }) => {
-      const response = await replyComment(authorId, content, commentId);
-      return response;
-    },
-    onSuccess: (response) => {
-      toast.success(response.message || "Reply created successfully!");
-      setReplyContent("");
-      queryClient.invalidateQueries({ queryKey: ["uniquePost", postId] });
-    },
-    onError: (error: AxiosError<any>) => {
-      const errorMessage =
-        error?.response?.data?.message || "Failed to create reply!";
-      toast.error(errorMessage);
-    },
-  });
-
-  const handleAddComment = () => {
-    addCommentMutation.mutate({
-      authorId: userId,
-      content: newComment,
-      postId,
-    });
-  };
-
-  const handleAddReply = (commentId: string) => {
-    addReplyMutation.mutate({
-      authorId: userId,
-      content: replyContent,
-      commentId,
-    });
-  };
+  const {
+    newComment,
+    setNewComment,
+    replyContent,
+    setReplyContent,
+    activeReply,
+    setActiveReply,
+    handleAddComment,
+    handleAddReply,
+  } = useCommentActions(postId, userId);
 
   if (postLoading) return <Loading />;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen  bg-opacity-50 p-4 overflow-y-auto bg-black md:p-8 transition-opacity duration-300 ease-in-out">
+    <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen  bg-opacity-75 p-4 overflow-y-auto bg-black md:p-8 transition-opacity duration-300 ease-in-out">
       <div
-        className="relative w-full max-w-3xl lg:max-w-5xl bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8"
+        className="relative w-full max-w-3xl lg:max-w-5xl rounded-lg shadow-lg p-4 sm:p-6 lg:p-8"
         style={{ backgroundColor: theme.background, color: theme.text }}
       >
         <button
@@ -132,7 +72,7 @@ const PostView: React.FC<PostViewProps> = ({
               />
               <div>
                 <p className="font-semibold">{post?.author.username}</p>
-                <p className="text-sm text-gray-300">
+                <p className="text-sm ">
                   Posted on:{" "}
                   {post?.createdAt
                     ? formatDate(post.createdAt)
@@ -158,12 +98,12 @@ const PostView: React.FC<PostViewProps> = ({
                         <p className="font-semibold">
                           {comment.author.username}
                         </p>
-                        <p className="text-gray-400">{comment.content}</p>
+                        <p>{comment.content}</p>
                         <button
                           className="text-sm text-blue-500 hover:underline mt-1"
                           onClick={() => setActiveReply(comment._id)}
                         >
-                          <FaReply className="text-lg" />
+                          <FaReply className="text-sm" />
                         </button>
 
                         {activeReply === comment._id && (
@@ -198,7 +138,7 @@ const PostView: React.FC<PostViewProps> = ({
                               <p className="font-semibold">
                                 {reply.author.username}
                               </p>
-                              <p className="text-gray-400">{reply.content}</p>
+                              <p>{reply.content}</p>
                             </div>
                           </div>
                         ))}
@@ -209,31 +149,22 @@ const PostView: React.FC<PostViewProps> = ({
               </div>
             </div>
 
-            <div className="mt-2 lg:mt-4">
-              <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">
-                Add a Comment
-              </h4>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  className="w-full p-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Write a comment..."
-                  style={{ color: theme.text }}
-                />
-                <button
-                  onClick={handleAddComment}
-                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500 text-white text-sm sm:text-base rounded-lg hover:bg-blue-600"
-                >
-                  <BiSolidSend />
-                </button>
-              </div>
+            <div className="flex flex-col gap-3">
+              <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                className="p-2 border rounded-lg w-full text-black"
+                placeholder="Write a comment..."
+              />
+              <Button
+                label="Add Comment"
+                onClick={handleAddComment}
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              />
             </div>
           </div>
         </div>
-
-        <div className="flex justify-between items-center text-sm mt-4 lg:mt-6">
+        <div className="flex justify-between items-center text-sm mt-3 lg:mt-3">
           <button
             className="flex items-center space-x-1 hover:text-red-500"
             style={{ color: theme.textHover }}
