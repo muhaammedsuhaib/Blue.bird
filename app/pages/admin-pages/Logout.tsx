@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import Button from "../../components/Button";
+import { Itheme } from "@/app/types/theme";
 
 interface LogoutProps {
   adminId: string;
-  theme: {
-    background: string;
-    text: string;
-    textHover: string;
-    buttonHover: string;
-    button: string;
-  };
+  theme:Itheme
 }
 
 const Logout: React.FC<LogoutProps> = ({ adminId, theme }) => {

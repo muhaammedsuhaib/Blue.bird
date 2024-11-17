@@ -1,6 +1,7 @@
 // Message.tsx
 import React, { useState } from 'react';
 import Modal from '../../components/Modal';
+import { Itheme } from '@/app/types/theme';
 
 interface Message {
   id: number;
@@ -17,10 +18,7 @@ interface Friend {
 
 interface MessageProps {
   userId: string;
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme:Itheme
 }
 
 const Message: React.FC<MessageProps> = ({ userId, theme }) => {

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import Modal from '../../components/Modal';
+import { Itheme } from '@/app/types/theme';
 
 interface AddStoryProps {
   userId: string; 
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme:Itheme;
 }
 
 const AddStory: React.FC<AddStoryProps> = ({ userId, theme }) => {

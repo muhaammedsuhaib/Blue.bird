@@ -15,16 +15,14 @@ import {
 import Link from 'next/link';
 import { IoCloseSharp } from 'react-icons/io5';
 import Image from 'next/image';
+import { Itheme } from '@/app/types/theme';
 
 interface SidebarProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
   isOpen: boolean;
   toggleSidebar: () => void;
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme:Itheme;
   pathurl:string;
   adminId:string;
 }

@@ -1,3 +1,4 @@
+import { Itheme } from '@/app/types/theme';
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
@@ -9,10 +10,7 @@ interface StoryViewProps {
   imageUrl: string; // Main story image URL
   date: string; // Date the story was published
   onclose: () => void; // Function to close the view
-  theme: {
-    background: string; // Background color
-    text: string; // Text color
-  };
+  theme: Itheme;
 }
 
 const StoryView: React.FC<StoryViewProps> = ({

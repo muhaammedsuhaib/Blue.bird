@@ -1,13 +1,11 @@
 "use client";
 import React from 'react';
 import Modal from '../../components/Modal';
+import { Itheme } from '@/app/types/theme';
 
 interface ProfileProps {
-  userId: string; // User ID for fetching user data
-  theme: {
-    background: string;
-    text: string;
-  };
+  userId: string; 
+  theme:Itheme
 }
 
 const Profile: React.FC<ProfileProps> = ({ userId, theme}) => {

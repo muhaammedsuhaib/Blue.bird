@@ -9,13 +9,11 @@ import toast from "react-hot-toast";
 import { createPost } from "@/app/api/userApis";
 import { useRouter } from "next/navigation";
 import Loading from "../../components/Loading";
+import { Itheme } from "@/app/types/theme";
 
 interface AddPostProps {
   userId: string;
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme: Itheme;
 }
 
 const AddPost: React.FC<AddPostProps> = ({ userId, theme }) => {

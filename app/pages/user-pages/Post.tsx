@@ -9,14 +9,11 @@ import { formatDate } from "@/app/utils/formatDate";
 import Loading from "../../components/Loading";
 import PostView from "./PostView";
 import { MdComment } from "react-icons/md";
+import { Itheme } from "@/app/types/theme";
 
 interface PostProps {
   userId: string;
-  theme: {
-    background: string;
-    text: string;
-    textHover: string;
-  };
+  theme:Itheme
 }
 
 const Post: React.FC<PostProps> = ({ userId, theme }) => {
@@ -47,7 +44,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
         >
           <div
             className="flex items-center mb-4 cursor-pointer"
-            onClick={() => handleOpenProfile(post._id)}
+            onClick={() => handleOpenProfile(post.author._id)}
           >
             <img
               src={post.author.profilePicture}
@@ -98,7 +95,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
       {openProfile && (
         <ProfileView
           onclose={() => setOpenProfile(null)}
-          profileuserId={userId}
+          profileuserId={openProfile}
           theme={theme}
           userId={userId}
         />

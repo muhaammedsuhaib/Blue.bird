@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import StoryView from './StoryView';
+import { Itheme } from '@/app/types/theme';
 
 interface Story {
   id: number;
@@ -11,14 +12,9 @@ interface Story {
   date: string; // Added publication date
 }
 
-interface Theme {
-  background: string;
-  text: string;
-  textHover: string;
-}
 
 interface StoryProps {
-  theme: Theme;
+  theme: Itheme;
   userId: string; // Added userId prop
 }
 

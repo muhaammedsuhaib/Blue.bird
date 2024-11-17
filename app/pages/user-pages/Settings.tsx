@@ -1,13 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import Modal from '../../components/Modal';
+import { Itheme } from '@/app/types/theme';
 
 interface SettingsProps {
-  userId: string; // User ID for saving user settings
-  theme: {
-    background: string;
-    text: string;
-  };
+  userId: string; 
+  theme:Itheme
  
 }
 

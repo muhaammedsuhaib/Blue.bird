@@ -2,6 +2,7 @@
 "use client";
 import React, { useState } from 'react';
 import Modal from '../../components/Modal';
+import { Itheme } from '@/app/types/theme';
 
 interface Notification {
   id: number;
@@ -11,10 +12,7 @@ interface Notification {
 
 interface NotificationProps {
   userId: string; // Added userId prop
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme:Itheme;
 }
 
 const Notification: React.FC<NotificationProps> = ({ userId, theme }) => {

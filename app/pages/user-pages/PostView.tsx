@@ -7,13 +7,10 @@ import { formatDate } from "@/app/utils/formatDate";
 import usePost from "@/app/hooks/usePost";
 import useCommentActions from "@/app/hooks/useCommentActions";
 import Button from "@/app/components/Button";
+import { Itheme } from "@/app/types/theme";
 
 interface PostViewProps {
-  theme: {
-    background: string;
-    text: string;
-    textHover: string;
-  };
+  theme:Itheme
   postId: string;
   userId: string;
   onclose: () => void;

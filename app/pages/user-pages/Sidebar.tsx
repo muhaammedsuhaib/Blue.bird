@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { IoCloseSharp } from "react-icons/io5";
 import Image from "next/image";
+import { Itheme } from "@/app/types/theme";
 
 
 interface SidebarProps {
@@ -22,11 +23,7 @@ interface SidebarProps {
   togglemode: () => void;
   isOpen: boolean;
   toggleSidebar: () => void;
-  theme: {
-    background: string;
-    text: string;
-    textHover: string;
-  };
+  theme:Itheme;
   userId: string;
   pathurl: string;
 }

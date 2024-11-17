@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
+import { Itheme } from '../types/theme';
 
 interface ModalProps {
   children: React.ReactNode;
-  theme: {
-    background: string;
-    text: string; 
-  };
+  theme:Itheme
 }
 
 const Modal: React.FC<ModalProps> = ({  children, theme }) => {

@@ -5,13 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import { searchUsers } from "@/app/api/userApis";
 import { User } from "@/app/types/user";
 import ProfileView from "./ProfileView";
+import { Itheme } from "@/app/types/theme";
 
 interface SearchProps {
   userId: string;
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme: Itheme
 }
 
 const Search: React.FC<SearchProps> = ({ userId, theme }) => {

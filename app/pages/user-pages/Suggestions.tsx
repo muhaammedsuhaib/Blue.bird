@@ -12,14 +12,11 @@ import {
 } from "@/app/api/userApis";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { Itheme } from "@/app/types/theme";
 
 interface SuggestionsProps {
   userId: string;
-  theme: {
-    background: string;
-    text: string;
-    textHover: string;
-  };
+  theme:Itheme;
 }
 
 const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {

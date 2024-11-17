@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import Loading from "../../components/Loading";
 import useProfile from "@/app/hooks/useProfile";
+import PostView from "./PostView";
+import { Itheme } from "@/app/types/theme";
 
 interface ProfileViewProps {
   profileuserId: string;
   userId: string;
   onclose: () => void;
-  theme: {
-    background: string;
-    text: string;
-  };
+  theme: Itheme
 }
 
 const ProfileView: React.FC<ProfileViewProps> = ({
@@ -20,6 +19,11 @@ const ProfileView: React.FC<ProfileViewProps> = ({
   onclose,
 }) => {
   const { user, profileLoading, error } = useProfile(profileuserId);
+  const [openPost, setOpenPost] = useState<null | string>(null);
+
+  const handleOpenPost = (id: string) => {
+    setOpenPost(id);
+  };
 
   if (profileLoading) {
     return <Loading message="Profile loading..." />;
@@ -33,7 +37,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({
       >
         {/* Close Button */}
         <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-transform transform hover:scale-110"
+          className="absolute top-4 right-4 text-gray-500 transition-transform transform hover:scale-110"
           onClick={onclose}
           aria-label="Close Profile"
         >
@@ -49,7 +53,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({
               <div className="flex flex-col md:flex-row md:items-center mb-6">
                 <img
                   src={
-                    user?.profilePicture || "https://via.placeholder.com/150"
+                    user?.profilePicture || "https://bluebir-d.vercel.app/user-profile.png"
                   }
                   alt={`${user?.username}'s profile`}
                   className="w-24 h-24 rounded-full border-4 border-gray-300 mb-4 md:mb-0 md:mr-6"
@@ -124,7 +128,8 @@ const ProfileView: React.FC<ProfileViewProps> = ({
                     <img
                       src={post.content || "https://via.placeholder.com/150"}
                       alt={post.content || "User post"}
-                      className="w-full h-40 object-cover rounded-lg"
+                      className="w-full h-52 object-cover rounded-lg"
+                      onClick={() => handleOpenPost(post._id)}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                       <p className="text-white font-semibold">
@@ -143,6 +148,14 @@ const ProfileView: React.FC<ProfileViewProps> = ({
           )}
         </div>
       </div>
+      {openPost && (
+        <PostView
+          userId={userId}
+          theme={theme}
+          postId={openPost}
+          onclose={() => setOpenPost(null)}
+        />
+      )}
     </div>
   );
 };
