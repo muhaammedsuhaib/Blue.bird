@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaReply, FaTimes } from "react-icons/fa";
 import { BiSolidSend } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
@@ -8,9 +8,10 @@ import usePost from "@/app/hooks/usePost";
 import useCommentActions from "@/app/hooks/useCommentActions";
 import Button from "@/app/components/Button";
 import { Itheme } from "@/app/types/theme";
+import ProfileView from "./ProfileView";
 
 interface PostViewProps {
-  theme:Itheme
+  theme: Itheme;
   postId: string;
   userId: string;
   onclose: () => void;
@@ -34,6 +35,11 @@ const PostView: React.FC<PostViewProps> = ({
     handleAddComment,
     handleAddReply,
   } = useCommentActions(postId, userId);
+  const [openProfile, setOpenProfile] = useState<null | string>(null);
+
+  const handleOpenProfile = (id: any) => {
+    setOpenProfile(id);
+  };
 
   if (postLoading) return <Loading />;
 
@@ -61,7 +67,10 @@ const PostView: React.FC<PostViewProps> = ({
           </div>
 
           <div className="flex flex-col flex-grow w-full lg:w-1/2">
-            <div className="flex items-center mb-4">
+            <div
+              className="flex items-center mb-4"
+              onClick={() => handleOpenProfile(post?.author?._id)}
+            >
               <img
                 src={post?.author?.profilePicture}
                 alt={post?.author.username}
@@ -85,7 +94,10 @@ const PostView: React.FC<PostViewProps> = ({
               <div className="space-y-3 sm:space-y-4">
                 {post?.comments?.map((comment) => (
                   <div key={comment._id} className="space-y-1">
-                    <div className="flex items-start gap-2 sm:gap-3">
+                    <div
+                      className="flex items-start gap-2 sm:gap-3"
+                      onClick={() => handleOpenProfile(comment.author._id)}
+                    >
                       <img
                         src={comment.author.profilePicture}
                         alt={comment.author.username}
@@ -171,6 +183,14 @@ const PostView: React.FC<PostViewProps> = ({
           </button>
         </div>
       </div>
+      {openProfile && (
+        <ProfileView
+          onclose={() => setOpenProfile(null)}
+          profileuserId={openProfile}
+          theme={theme}
+          userId={userId}
+        />
+      )}
     </div>
   );
 };

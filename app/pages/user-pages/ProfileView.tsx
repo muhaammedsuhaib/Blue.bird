@@ -9,7 +9,7 @@ interface ProfileViewProps {
   profileuserId: string;
   userId: string;
   onclose: () => void;
-  theme: Itheme
+  theme: Itheme;
 }
 
 const ProfileView: React.FC<ProfileViewProps> = ({
@@ -24,7 +24,6 @@ const ProfileView: React.FC<ProfileViewProps> = ({
   const handleOpenPost = (id: string) => {
     setOpenPost(id);
   };
-
   if (profileLoading) {
     return <Loading message="Profile loading..." />;
   }
@@ -53,7 +52,8 @@ const ProfileView: React.FC<ProfileViewProps> = ({
               <div className="flex flex-col md:flex-row md:items-center mb-6">
                 <img
                   src={
-                    user?.profilePicture || "https://bluebir-d.vercel.app/user-profile.png"
+                    user?.profilePicture ||
+                    "https://bluebir-d.vercel.app/user-profile.png"
                   }
                   alt={`${user?.username}'s profile`}
                   className="w-24 h-24 rounded-full border-4 border-gray-300 mb-4 md:mb-0 md:mr-6"
@@ -124,12 +124,15 @@ const ProfileView: React.FC<ProfileViewProps> = ({
               {/* User Posts */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {user?.posts?.map((post: any, index: number) => (
-                  <div key={index} className="relative group cursor-pointer">
+                  <div
+                    key={index}
+                    className="relative group cursor-pointer"
+                    onClick={() => handleOpenPost(post._id)}
+                  >
                     <img
                       src={post.content || "https://via.placeholder.com/150"}
                       alt={post.content || "User post"}
                       className="w-full h-52 object-cover rounded-lg"
-                      onClick={() => handleOpenPost(post._id)}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                       <p className="text-white font-semibold">
