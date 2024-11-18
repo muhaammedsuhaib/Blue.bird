@@ -3,69 +3,36 @@ import Button from "../../components/Button";
 import Link from "next/link";
 import ProfileView from "./ProfileView";
 import Loading from "../../components/Loading";
-import { FollowResponse, User } from "@/app/types/user";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  fetchProfile,
-  fetchSuggestions,
-  toggleFollow,
-} from "@/app/api/userApis";
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
+import { User } from "@/app/types/user";
 import { Itheme } from "@/app/types/theme";
+import useFollow from "@/app/hooks/useFollow";
+import useUser from "@/app/hooks/useUser";
+import useSuggestion from "@/app/hooks/useSuggestion";
 
 interface SuggestionsProps {
   userId: string;
-  theme:Itheme;
+  theme: Itheme;
 }
 
 const Suggestions: React.FC<SuggestionsProps> = ({ userId, theme }) => {
   const [openProfile, setOpenprofile] = useState<null | string>(null);
-  const queryClient = useQueryClient();
+  const { data: user, isLoading: profileloading } = useUser(userId);
+  const { data: suggestions, isLoading: suggestionsloading } =
+    useSuggestion(userId);
 
-  const { data: user, isLoading: profileloading } = useQuery({
-    queryKey: ["userProfile", userId],
-    queryFn: () => fetchProfile(userId),
-    enabled: !!userId,
-  });
-  const { data: suggestions, isLoading: suggestionsloading } = useQuery({
-    queryKey: ["suggestionsProfiles", userId],
-    queryFn: () => fetchSuggestions(userId),
-    enabled: !!userId,
-  });
+  const { followToggle, isLoading: isFollowing } = useFollow();
 
-  const followToggle = useMutation<
-    FollowResponse,
-    AxiosError,
-    { userId: string; targetId: string }
-  >({
-    mutationFn: async ({ userId, targetId }) => {
-      const response = await toggleFollow(userId, targetId);
-      return response;
-    },
-    onSuccess: (response) => {
-      toast.success(response.message || "Comment created successfully!");
-      queryClient.invalidateQueries({ queryKey: ["userProfile", userId] });
-      queryClient.invalidateQueries({
-        queryKey: ["suggestionsProfiles", userId],
-      });
-    },
-    onError: (error: AxiosError<any>) => {
-      const errorMessage =
-        error?.response?.data?.message || "Failed to Follow!";
-      toast.error(errorMessage);
-    },
-  });
-
+  const handleFollow = (id: string) => {
+    followToggle({ userId, targetId: id });
+  };
   const handleOpenProfile = (id: string) => {
     setOpenprofile(id);
   };
 
-  const handleFollow = (id: string) => {
-    followToggle.mutate({ userId, targetId: id });
-  };
+  // if (isFollowing) return <Loading message="Following loading..." />;
   if (profileloading) return <Loading message="Profile loading..." />;
   if (suggestionsloading) return <Loading message="Suggestions loading..." />;
+
   return (
     <div
       className="w-full h-fit p-4 border-l-2"

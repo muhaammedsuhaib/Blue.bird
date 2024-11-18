@@ -19,3 +19,6 @@ export interface FollowResponse {
   message: string;
   data: User;
 }
+export interface LikeResponse{
+  message:string;
+}

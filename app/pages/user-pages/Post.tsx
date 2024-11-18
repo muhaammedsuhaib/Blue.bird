@@ -10,6 +10,7 @@ import Loading from "../../components/Loading";
 import PostView from "./PostView";
 import { MdComment } from "react-icons/md";
 import { Itheme } from "@/app/types/theme";
+import useLike from "@/app/hooks/useLike";
 
 interface PostProps {
   userId: string;
@@ -25,13 +26,17 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
     queryFn: () => fetchPosts(),
     enabled: !!userId,
   });
-
+  const { likeToggle, isLoading: isLike } = useLike(refetchPosts);
   const handleOpenProfile = (id: string) => {
     setOpenProfile(id);
   };
 
   const handleOpenPost = (id: string) => {
     setOpenPost(id);
+  };
+
+  const handleLike=(id: string) => {
+    likeToggle({ userId:userId, postId: id });
   };
 
   const handleCloseModal = () => {
@@ -77,7 +82,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
 
           <div className="flex justify-between items-center text-sm">
             <button
-              // onClick={() => handleLike(post._id)}
+              onClick={() => handleLike(post._id)}
               className="flex items-center space-x-1 hover:text-red-500"
               style={{ color: theme.textHover }}
             >
