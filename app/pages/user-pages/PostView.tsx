@@ -94,17 +94,18 @@ const PostView: React.FC<PostViewProps> = ({
               <div className="space-y-3 sm:space-y-4">
                 {post?.comments?.map((comment) => (
                   <div key={comment._id} className="space-y-1">
-                    <div
-                      className="flex items-start gap-2 sm:gap-3"
-                      onClick={() => handleOpenProfile(comment.author._id)}
-                    >
+                    <div className="flex items-start gap-2 sm:gap-3">
                       <img
                         src={comment.author.profilePicture}
                         alt={comment.author.username}
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
+                        onClick={() => handleOpenProfile(comment.author._id)}
                       />
                       <div>
-                        <p className="font-semibold">
+                        <p
+                          className="font-semibold"
+                          onClick={() => handleOpenProfile(comment.author._id)}
+                        >
                           {comment.author.username}
                         </p>
                         <p>{comment.content}</p>
@@ -142,9 +143,17 @@ const PostView: React.FC<PostViewProps> = ({
                               src={reply.author.profilePicture}
                               alt={reply.author.username}
                               className="w-7 h-7 sm:w-8 sm:h-8 rounded-full"
+                              onClick={() =>
+                                handleOpenProfile(reply.author._id)
+                              }
                             />
                             <div>
-                              <p className="font-semibold">
+                              <p
+                                className="font-semibold"
+                                onClick={() =>
+                                  handleOpenProfile(reply.author._id)
+                                }
+                              >
                                 {reply.author.username}
                               </p>
                               <p>{reply.content}</p>

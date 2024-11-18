@@ -1,4 +1,3 @@
-// Message.tsx
 import React, { useState } from 'react';
 import Modal from '../../components/Modal';
 import { Itheme } from '@/app/types/theme';

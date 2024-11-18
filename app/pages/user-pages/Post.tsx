@@ -20,7 +20,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
   const [openProfile, setOpenProfile] = useState<null | string>(null);
   const [openPost, setOpenPost] = useState<null | string>(null);
 
-  const { data: posts, isLoading: postLoading } = useQuery<GetPostResponse[]>({
+  const { data: posts, isLoading: postLoading, refetch:refetchPosts} = useQuery<GetPostResponse[]>({
     queryKey: ["fetchposts"],
     queryFn: () => fetchPosts(),
     enabled: !!userId,
@@ -32,6 +32,12 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
 
   const handleOpenPost = (id: string) => {
     setOpenPost(id);
+  };
+
+  const handleCloseModal = () => {
+    setOpenProfile(null);
+    setOpenPost(null);
+    refetchPosts(); 
   };
   if (postLoading) return <Loading />;
   return (
@@ -94,7 +100,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
       {/* Profile View Modal */}
       {openProfile && (
         <ProfileView
-          onclose={() => setOpenProfile(null)}
+          onclose={handleCloseModal}
           profileuserId={openProfile}
           theme={theme}
           userId={userId}
@@ -107,7 +113,7 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
           userId={userId}
           theme={theme}
           postId={openPost}
-          onclose={() => setOpenPost(null)}
+          onclose={handleCloseModal}
         />
       )}
     </div>

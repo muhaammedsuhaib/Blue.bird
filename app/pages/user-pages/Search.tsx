@@ -6,16 +6,23 @@ import { searchUsers } from "@/app/api/userApis";
 import { User } from "@/app/types/user";
 import ProfileView from "./ProfileView";
 import { Itheme } from "@/app/types/theme";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface SearchProps {
   userId: string;
-  theme: Itheme
+  theme: Itheme;
 }
 
 const Search: React.FC<SearchProps> = ({ userId, theme }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
   const [openProfile, setOpenprofile] = useState<null | string>(null);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const searchTermFromQuery = searchParams.get("search") || "";
+  const [searchTerm, setSearchTerm] = useState(searchTermFromQuery);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
@@ -23,6 +30,11 @@ const Search: React.FC<SearchProps> = ({ userId, theme }) => {
 
     return () => clearTimeout(timer);
   }, [searchTerm]);
+
+  useEffect(() => {
+    const query = debouncedSearchTerm ? `?search=${debouncedSearchTerm}` : "";
+    router.push(query);
+  }, [debouncedSearchTerm, router]);
 
   const {
     data: users,
