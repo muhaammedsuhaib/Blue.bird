@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaReply, FaTimes } from "react-icons/fa";
+import { FaHeart, FaReply, FaTimes } from "react-icons/fa";
 import { BiSolidSend } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
 import Loading from "../../components/Loading";
@@ -9,6 +9,8 @@ import useCommentActions from "@/app/hooks/useCommentActions";
 import Button from "@/app/components/Button";
 import { Itheme } from "@/app/types/theme";
 import ProfileView from "./ProfileView";
+import useUser from "@/app/hooks/useUser";
+import useLike from "@/app/hooks/useLike";
 
 interface PostViewProps {
   theme: Itheme;
@@ -23,7 +25,11 @@ const PostView: React.FC<PostViewProps> = ({
   onclose,
   userId,
 }) => {
-  const { data: post, isLoading: postLoading } = usePost(postId);
+  const {
+    data: post,
+    isLoading: postLoading,
+    refetch: refetchPost,
+  } = usePost(postId);
 
   const {
     newComment,
@@ -39,6 +45,17 @@ const PostView: React.FC<PostViewProps> = ({
 
   const handleOpenProfile = (id: any) => {
     setOpenProfile(id);
+  };
+  const {
+    data: user,
+    isLoading: profileloading,
+    refetch: refetchUser,
+  } = useUser(userId);
+
+  const { likeToggle, isLoading: isLike } = useLike(refetchPost, refetchUser);
+
+  const handleLike = (id: string) => {
+    likeToggle({ userId: userId, postId: id });
   };
 
   if (postLoading) return <Loading />;
@@ -186,8 +203,15 @@ const PostView: React.FC<PostViewProps> = ({
           <button
             className="flex items-center space-x-1 hover:text-red-500"
             style={{ color: theme.textHover }}
+            onClick={() => handleLike(postId)}
           >
-            <FiHeart className="text-lg" />
+            <FaHeart
+              className={`text-lg ${
+                user?.likedPosts?.includes(postId)
+                  ? "text-red-600"
+                  : "text-black"
+              }`}
+            />
             <span>{post?.likes.length} Likes</span>
           </button>
         </div>

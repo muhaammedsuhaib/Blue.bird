@@ -1,32 +1,36 @@
 "use client";
 import React, { useState } from "react";
 import ProfileView from "./ProfileView";
-import { FiHeart } from "react-icons/fi";
-import { fetchPosts } from "@/app/api/userApis";
-import { useQuery } from "@tanstack/react-query";
-import { GetPostResponse } from "@/app/types/post";
 import { formatDate } from "@/app/utils/formatDate";
 import Loading from "../../components/Loading";
 import PostView from "./PostView";
 import { MdComment } from "react-icons/md";
 import { Itheme } from "@/app/types/theme";
 import useLike from "@/app/hooks/useLike";
+import usePosts from "@/app/hooks/usePosts";
+import useUser from "@/app/hooks/useUser";
+import { FaHeart } from "react-icons/fa";
 
 interface PostProps {
   userId: string;
-  theme:Itheme
+  theme: Itheme;
 }
 
 const Post: React.FC<PostProps> = ({ userId, theme }) => {
   const [openProfile, setOpenProfile] = useState<null | string>(null);
   const [openPost, setOpenPost] = useState<null | string>(null);
+  const {
+    data: user,
+    isLoading: profileloading,
+    refetch: refetchUser,
+  } = useUser(userId);
+  const {
+    data: posts,
+    isLoading: postLoading,
+    refetch: refetchPosts,
+  } = usePosts(userId);
 
-  const { data: posts, isLoading: postLoading, refetch:refetchPosts} = useQuery<GetPostResponse[]>({
-    queryKey: ["fetchposts"],
-    queryFn: () => fetchPosts(),
-    enabled: !!userId,
-  });
-  const { likeToggle, isLoading: isLike } = useLike(refetchPosts);
+  const { likeToggle, isLoading: isLike } = useLike(refetchPosts, refetchUser);
   const handleOpenProfile = (id: string) => {
     setOpenProfile(id);
   };
@@ -35,16 +39,16 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
     setOpenPost(id);
   };
 
-  const handleLike=(id: string) => {
-    likeToggle({ userId:userId, postId: id });
+  const handleLike = (id: string) => {
+    likeToggle({ userId: userId, postId: id });
   };
 
   const handleCloseModal = () => {
     setOpenProfile(null);
     setOpenPost(null);
-    refetchPosts(); 
+    refetchPosts();
   };
-  if (postLoading) return <Loading />;
+  if (postLoading || profileloading) return <Loading />;
   return (
     <div>
       {posts?.map((post) => (
@@ -86,7 +90,13 @@ const Post: React.FC<PostProps> = ({ userId, theme }) => {
               className="flex items-center space-x-1 hover:text-red-500"
               style={{ color: theme.textHover }}
             >
-              <FiHeart className="text-lg" />
+              <FaHeart
+                className={`text-lg ${
+                  user?.likedPosts?.includes(post._id)
+                    ? "text-red-600"
+                    : "text-black"
+                }`}
+              />
               <span>{post.likes?.length} Likes</span>
             </button>
 

@@ -9,7 +9,7 @@ interface LikeParams {
   postId: string;
 }
 
-const useLike = (refetchPosts: () => void) => {
+const useLike = (refetchPosts: () => void,refetchUser:()=>void) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<LikeResponse, AxiosError<{ message: string }>, LikeParams>({
@@ -20,6 +20,7 @@ const useLike = (refetchPosts: () => void) => {
       toast.success(response.message || "Like status updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["fetchposts", userId] });
       refetchPosts();
+      refetchUser();
     //   queryClient.invalidateQueries({ queryKey: ["suggestionsProfiles", userId] });
     },
     onError: (error: AxiosError<{ message: string }>) => {
