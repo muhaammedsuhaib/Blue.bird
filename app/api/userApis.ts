@@ -6,6 +6,7 @@ import {
   GetuniquePostResponse,
   Post,
 } from "../types/post";
+import { CreateStorieResponse } from "../types/storie";
 import { FollowResponse, LikeResponse, User } from "../types/user";
 
 export const fetchProfile = async (id: string): Promise<User> => {
@@ -98,6 +99,21 @@ export const toggleLike = async ( userId:string, postId:string): Promise<LikeRes
     return response.data as LikeResponse;
   } catch (error) {
     console.error("Like or Unlike add failed:", error);
+    throw error;
+  }
+};
+
+
+export const createStory = async (
+  formData: FormData
+): Promise<CreateStorieResponse> => {
+  try {
+    const response = await userAxios.post("/storie", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data as CreateStorieResponse;
+  } catch (error) {
+    console.error("Storie creation failed:", error);
     throw error;
   }
 };

@@ -1,16 +1,22 @@
 import React from "react";
 
 interface InputProps {
-  type: string; 
+  required?:boolean;
+  id?:string,
+  type?: string; 
   placeholder?: string; 
-  value: string | number; 
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+  value?: string | number; 
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
   className?: string;
   label?: string; 
+  accept?:string;
 }
 
 const Input: React.FC<InputProps> = ({
+  required,
+  id,
   type,
+  accept,
   placeholder,
   value,
   onChange,
@@ -23,11 +29,14 @@ const Input: React.FC<InputProps> = ({
         <label className="block text-sm font-medium mb-2">{label}</label>
       )}
       <input
+        id={id}
         type={type}
         placeholder={placeholder}
+        required={required}
         value={value}
         onChange={onChange}
-        className={`w-full p-2 border border-gray-300 rounded ${className}`}
+        className={`${className}`}
+        accept={accept}
       />
     </div>
   );
