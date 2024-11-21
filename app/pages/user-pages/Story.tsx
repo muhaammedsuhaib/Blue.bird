@@ -1,143 +1,134 @@
-import React, { useState } from 'react';
-import StoryView from './StoryView';
-import { Itheme } from '@/app/types/theme';
-
-interface Story {
-  id: number;
-  title: string;
-  imageUrl: string;
-  content: string; // Added content field for the story
-  author: string; // Added author field
-  authorImage: string; // Added author image URL
-  date: string; // Added publication date
-}
-
+import React, { useState, useMemo } from "react";
+import { FaTimes } from "react-icons/fa";
+import InstaStories from "react-insta-stories";
+import useStories from "@/app/hooks/useStories";
+import { Itheme } from "@/app/types/theme";
+import Loading from "@/app/components/Loading";
+import { formatDate } from "@/app/utils/formatDate";
+import { StoryData, StoryItem } from "@/app/types/storie";
 
 interface StoryProps {
   theme: Itheme;
-  userId: string; // Added userId prop
+  userId: string;
 }
 
-const stories: Story[] = [
-  {
-    id: 1,
-    title: 'Story 1',
-    imageUrl: 'https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg',
-    content: 'This is the content of Story 1.',
-    author: 'Alice Johnson',
-    authorImage: 'https://muhaammedsuhaib.github.io/Front-end-Developer-portfolio/assets/imgs/avatar.jpg',
-    date: 'October 24, 2024',
-  },
-  {
-    id: 2,
-    title: 'Story 2',
-    imageUrl: 'https://via.placeholder.com/150/771796',
-    content: 'This is the content of Story 2.',
-    author: 'Bob Smith',
-    authorImage: 'https://via.placeholder.com/50',
-    date: 'October 23, 2024',
-  },
-  {
-    id: 3,
-    title: 'Story 2',
-    imageUrl: 'https://via.placeholder.com/150/771796',
-    content: 'This is the content of Story 2.',
-    author: 'Bob Smith',
-    authorImage: 'https://via.placeholder.com/50',
-    date: 'October 23, 2024',
-  },
-  {
-    id: 4,
-    title: 'Story 2',
-    imageUrl: 'https://via.placeholder.com/150/771796',
-    content: 'This is the content of Story 2.',
-    author: 'Bob Smith',
-    authorImage: 'https://via.placeholder.com/50',
-    date: 'October 23, 2024',
-  },
-  {
-    id: 5,
-    title: 'Story 2',
-    imageUrl: 'https://via.placeholder.com/150/771796',
-    content: 'This is the content of Story 2.',
-    author: 'Bob Smith',
-    authorImage: 'https://via.placeholder.com/50',
-    date: 'October 23, 2024',
-  },
-  {
-    id: 6,
-    title: 'Story 2',
-    imageUrl: 'https://via.placeholder.com/150/771796',
-    content: 'This is the content of Story 2.',
-    author: 'Bob Smith',
-    authorImage: 'https://via.placeholder.com/50',
-    date: 'October 23, 2024',
-  },
-  {
-    id: 7,
-    title: 'Story 2',
-    imageUrl: 'https://via.placeholder.com/150/771796',
-    content: 'This is the content of Story 2.',
-    author: 'Bob Smith',
-    authorImage: 'https://via.placeholder.com/50',
-    date: 'October 23, 2024',
-  },
-  
-];
-
 const Story: React.FC<StoryProps> = ({ theme, userId }) => {
+  const { data, isLoading, error } = useStories(userId);
+  const [selectedUserIndex, setSelectedUserIndex] = useState<number | null>(
+    null
+  );
+  const [selectedStoryIndex, setSelectedStoryIndex] = useState<number>(0);
 
+  const stories: StoryData[] = data || [];
 
-  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+  const formattedStoriesByUser = useMemo(() => {
+    return stories
+      .map((story: StoryData) =>
+        story.stories
+          .filter((item: StoryItem) => item.content)
+          .map((item: StoryItem) => ({
+            url: item.content,
+            header: {
+              heading: story.author?.username || "Anonymous",
+              subheading: `Posted on ${
+                item.postedAt ? `${formatDate(item.postedAt)}` : "Unknown date"
+              }`,
+              profileImage: story.author?.profilePicture || "",
+            },
+          }))
+      )
+      .filter((userStories) => userStories.length > 0);
+  }, [stories]);
 
   const handleClose = () => {
-    setSelectedStory(null); 
+    setSelectedUserIndex(null);
+    setSelectedStoryIndex(0);
   };
+
+  const handleStoryEnd = () => {
+    const currentUserStories = formattedStoriesByUser[selectedUserIndex!];
+
+    if (selectedStoryIndex < currentUserStories.length - 1) {
+      setSelectedStoryIndex((prev) => prev + 1);
+    } else if (selectedUserIndex! < formattedStoriesByUser.length - 1) {
+      setSelectedUserIndex((prev) => (prev !== null ? prev + 1 : 0));
+      setSelectedStoryIndex(0);
+    } else {
+      handleClose();
+    }
+  };
+
+  if (isLoading) return <Loading />;
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-full text-red-500">
+        Failed to load stories. Please try again later.
+      </div>
+    );
+  }
 
   return (
     <div
-      className="shadow-md rounded-xl p-2"
+      className="shadow-md rounded-xl p-4"
       style={{
         backgroundColor: theme?.background,
         color: theme?.text,
       }}
     >
-      <div className="flex gap-1 overflow-auto no-scrollbar">
-        {stories?.map((story) => (
-          <div key={story?.id} className="flex-shrink-0" onClick={() => setSelectedStory(story)}>
-            <div className="flex flex-col items-center p-2">
+      <div className="flex gap-4 overflow-auto no-scrollbar">
+        {stories.map((story, index) => (
+          <button
+            key={story.author._id}
+            className="flex-shrink-0 focus:outline-none"
+            onClick={() => {
+              setSelectedUserIndex(index);
+              setSelectedStoryIndex(0);
+            }}
+            aria-label={`View story by ${story.author.username}`}
+          >
+            <div className="relative w-20 h-20">
               <img
-                src={story?.imageUrl}
-                alt={story?.title}
-                aria-label={story?.title}
-                className="w-20 h-20 rounded-full object-cover mb-2 cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg"
-                style={{
-                  borderColor: theme?.textHover,
-                  borderWidth: '3px',
-                  borderStyle: 'solid',
-                }}
+                src={story.author.profilePicture}
+                alt={story.author.username}
+                className="w-full h-full rounded-full object-cover border-4"
               />
-              <span className="text-sm text-center" style={{ color: theme?.text }}>
-                {story?.title}
-              </span>
+              <div
+                className="absolute inset-0 rounded-full border-[3px] border-blue-600"
+                style={{ boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)" }}
+              ></div>
             </div>
-          </div>
+            <span className="block text-center text-sm truncate mt-2 text-gray-700 w-7">
+              {story.author.username || "Anonymous"}
+            </span>
+          </button>
         ))}
       </div>
+      {selectedUserIndex !== null && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="w-full h-full max-w-4xl">
+            <button
+              className="absolute top-4 right-4 sm:right-6 md:right-8 lg:right-10 bg-gray-700 text-white hover:bg-gray-600 hover:text-gray-300 focus:outline-none p-2 rounded-full z-50 hover:animate-spin"
+              onClick={handleClose}
+              aria-label="Close story viewer"
+            >
+              <FaTimes className="text-xl sm:text-2xl" />
+            </button>
 
-      {/* Render StoryView if a story is selected */}
-      {selectedStory && (
-        <StoryView
-          key={selectedStory?.title}
-          title={selectedStory?.title}
-          content={selectedStory?.content}
-          author={selectedStory?.author}
-          authorImage={selectedStory?.authorImage}
-          date={selectedStory?.date}
-          onclose={handleClose} // Function to close the modal
-          theme={theme}
-          imageUrl={selectedStory?.imageUrl}
-        />
+            <InstaStories
+              stories={formattedStoriesByUser[selectedUserIndex]}
+              currentIndex={selectedStoryIndex}
+              onStoryEnd={handleStoryEnd}
+              defaultInterval={5000}
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
       )}
     </div>
   );

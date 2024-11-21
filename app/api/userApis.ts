@@ -84,25 +84,33 @@ export const replyComment = async (
     throw error;
   }
 };
-export const toggleFollow = async ( userId:string, targetId:string): Promise<FollowResponse> => {
+export const toggleFollow = async (
+  userId: string,
+  targetId: string
+): Promise<FollowResponse> => {
   try {
-    const response = await userAxios.post("/user/togglefollow", { userId, targetId   });
+    const response = await userAxios.post("/user/togglefollow", {
+      userId,
+      targetId,
+    });
     return response.data as FollowResponse;
   } catch (error) {
     console.error("Follow or Unfollow creation failed:", error);
     throw error;
   }
 };
-export const toggleLike = async ( userId:string, postId:string): Promise<LikeResponse> => {
+export const toggleLike = async (
+  userId: string,
+  postId: string
+): Promise<LikeResponse> => {
   try {
-    const response = await userAxios.post("/post/like", { userId, postId   });
+    const response = await userAxios.post("/post/like", { userId, postId });
     return response.data as LikeResponse;
   } catch (error) {
     console.error("Like or Unlike add failed:", error);
     throw error;
   }
 };
-
 
 export const createStory = async (
   formData: FormData
@@ -116,4 +124,8 @@ export const createStory = async (
     console.error("Storie creation failed:", error);
     throw error;
   }
+};
+export const fetchStories = async (id: string): Promise<any> => {
+  const response = await userAxios.get(`/storie/${id}`);
+  return response.data.data;
 };

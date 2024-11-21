@@ -12,15 +12,8 @@ interface AddStoryProps {
 }
 
 const AddStory: React.FC<AddStoryProps> = ({ userId, theme }) => {
-  const {
-    storyImage,
-    preview,
-    caption,
-    setCaption,
-    handleImageUpload,
-    handleSubmit,
-    isPending,
-  } = useCreateStory(userId);
+  const { storyImage, preview, handleImageUpload, handleSubmit, isPending } =
+    useCreateStory(userId);
 
   if (isPending) return <Loading message="adding story..." />;
 
@@ -60,21 +53,12 @@ const AddStory: React.FC<AddStoryProps> = ({ userId, theme }) => {
         <label htmlFor="caption" className="block text-sm font-medium mb-2">
           Write a caption
         </label>
-        <textarea
-          id="caption"
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
-          placeholder="Write your caption here..."
-          className="w-full p-2 border border-gray-300 rounded-lg mb-4 resize-none"
-          rows={4}
-          required
-        />
       </div>
 
       <div className="flex justify-end">
         <Button
           onClick={handleSubmit}
-          disabled={isPending || !storyImage || !caption}
+          disabled={isPending || !storyImage}
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           label={isPending ? "Adding Story..." : "Add Story"}
         />
