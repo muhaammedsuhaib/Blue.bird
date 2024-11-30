@@ -48,13 +48,6 @@ const AddStory: React.FC<AddStoryProps> = ({ userId, theme }) => {
           />
         </div>
       )}
-
-      <div className="mb-4">
-        <label htmlFor="caption" className="block text-sm font-medium mb-2">
-          Write a caption
-        </label>
-      </div>
-
       <div className="flex justify-end">
         <Button
           onClick={handleSubmit}

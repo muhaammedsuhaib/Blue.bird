@@ -10,7 +10,7 @@ import Search from "@/app/pages/user-pages/Search";
 import AddStory from "@/app/pages/user-pages/AddStory";
 import AddPost from "@/app/pages/user-pages/AddPost";
 import Message from "@/app/pages/user-pages/Message";
-import Profile from "@/app/pages/user-pages/Profile";
+import Profile from "@/app/pages/user-pages/profile/Profile";
 import Settings from "@/app/pages/user-pages/Settings";
 import Notification from "@/app/pages/user-pages/Notification";
 import Image from "next/image";

@@ -11,6 +11,7 @@ export interface User {
   posts: string[];
   likedPosts: string[];
   comments: string[];
+  archivedStories: string[];
   createdAt: Date;
   updatedAt: Date;
   __v?: number;

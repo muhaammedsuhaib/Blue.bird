@@ -1,6 +1,4 @@
 "use client";
-
-import Image from "next/image";
 import Link from "next/link";
 import {
   FaUserFriends,
@@ -53,23 +51,16 @@ export default function Home() {
         ))}
       </section>
 
-      <div className="relative flex items-center w-full justify-center mt-14 max-w-5xl px-4 mx-auto">
+      <div className="flex items-center justify-center h-[200px] w-full mt-14 mx-auto">
         <video
           autoPlay
           loop
           muted
-          className="absolute w-full h-full object-cover rounded-lg"
+          className="w-full object-cover rounded-lg"
+          height={200}
         >
           <source src="/bluebird-bg.mp4" type="video/mp4" />
         </video>
-        <Image
-          src="/Bluebirdsocial.png"
-          alt="Blue Bird Logo"
-          width={200}
-          height={200}
-          priority
-          className="rounded-full shadow-2xl hover:scale-105 transition-transform z-10 p-6"
-        />
       </div>
 
       {/* Footer */}
